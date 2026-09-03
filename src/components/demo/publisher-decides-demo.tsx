@@ -144,12 +144,12 @@ export function PublisherDecidesDemo() {
         {step === 0 ? (
           <div className={styles.step} key="intro">
             <p className={styles.eyebrow}>How the live demonstration works</p>
-            <h1>Act as a reader bringing ChatGPT to a medical journal.</h1>
+            <h1>You are a reader bringing ChatGPT to a medical journal.</h1>
             <ol className={styles.walkthroughList}>
               <li>
                 <span>
                   <strong>Open the medical journal.</strong>
-                  <small>Enter the fictional site with a signed-in reader session.</small>
+                  <small>Open the fictional journal in a simulated signed-in session.</small>
                 </span>
               </li>
               <li>
@@ -181,7 +181,7 @@ export function PublisherDecidesDemo() {
         {step === 1 ? (
           <div className={styles.step} key="scenario">
             <p className={styles.eyebrow}>How the live demonstration works</p>
-            <h1>The publisher checks two conditions before returning anything.</h1>
+            <h1>The publisher checks two conditions before deciding what to return.</h1>
             <div className={styles.policyOverview}>
               <ol className={`${styles.walkthroughList} ${styles.conditionList}`}>
               <li>
@@ -191,8 +191,8 @@ export function PublisherDecidesDemo() {
                   disabled={!interactive || sessionPending}
                 >
                   <legend>
-                    <strong>What the reader can open</strong>
-                    <small>Reader entitlement</small>
+                    <strong>Reader access</strong>
+                    <small>What the reader can open</small>
                   </legend>
                   <div className={styles.conditionOptions}>
                     <label className={styles.conditionOption} data-selected={entitlement === "guest"}>
@@ -204,8 +204,7 @@ export function PublisherDecidesDemo() {
                         type="radio"
                       />
                       <span>
-                        <b>Not entitled</b>
-                        <em>Guest preview</em>
+                        <b>Guest preview</b>
                       </span>
                     </label>
                     <label className={styles.conditionOption} data-selected={entitlement === "entitled"}>
@@ -217,8 +216,7 @@ export function PublisherDecidesDemo() {
                         type="radio"
                       />
                       <span>
-                        <b>Entitled</b>
-                        <em>Full guideline access</em>
+                        <b>Full article access</b>
                       </span>
                     </label>
                   </div>
@@ -231,8 +229,8 @@ export function PublisherDecidesDemo() {
                   disabled={!interactive || sessionPending}
                 >
                   <legend>
-                    <strong>What the agent may receive</strong>
-                    <small>Proposed external signal (judge-controlled simulation)</small>
+                    <strong>Proposed agent credential</strong>
+                    <small>Judge-controlled simulation; not verified by WebMCP.</small>
                   </legend>
                   <div className={styles.conditionOptions}>
                     <label className={styles.conditionOption} data-selected={credentialRecognition === "not_recognized"}>
@@ -245,7 +243,6 @@ export function PublisherDecidesDemo() {
                       />
                       <span>
                         <b>Not recognized by publisher</b>
-                        <em>No qualifying external credential</em>
                       </span>
                     </label>
                     <label className={styles.conditionOption} data-selected={credentialRecognition === "recognized"}>
@@ -257,8 +254,7 @@ export function PublisherDecidesDemo() {
                         type="radio"
                       />
                       <span>
-                        <b>Recognized by publisher</b>
-                        <em>Proposed zero-retention credential simulated</em>
+                        <b>Zero-retention claim recognized</b>
                       </span>
                     </label>
                   </div>
@@ -341,20 +337,9 @@ export function PublisherDecidesDemo() {
           <div className={styles.step} key="prompt">
             <h1>How to run the demo</h1>
             <ol className={`${styles.walkthroughList} ${styles.actionList}`}>
-              <li><span><strong>Review the question below.</strong></span></li>
-              <li><span><strong>Open the journal.</strong></span></li>
-              <li>
-                <span>
-                  <strong>
-                    Use Demo Controls to change reader access{" "}
-                    <br />
-                    and the simulated policy signal.
-                  </strong>
-                </span>
-              </li>
               <li>
                 <div className={styles.promptStep}>
-                  <strong>Copy the question and agent instruction.</strong>
+                  <strong>Copy the prompt below.</strong>
                   <div className={styles.promptRow}>
                     <blockquote>
                       <p className={styles.promptParagraph}>
@@ -384,9 +369,20 @@ export function PublisherDecidesDemo() {
                   </div>
                 </div>
               </li>
+              <li><span><strong>Open the journal.</strong></span></li>
               <li>
                 <span>
                   <strong>Paste the prompt into this browser’s agent.</strong>
+                </span>
+              </li>
+              <li>
+                <span>
+                  <strong>Open Demo controls and change reader access or publisher recognition.</strong>
+                </span>
+              </li>
+              <li>
+                <span>
+                  <strong>Ask the same question again and compare what the publisher returns.</strong>
                 </span>
               </li>
             </ol>

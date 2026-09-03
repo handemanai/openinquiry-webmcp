@@ -161,7 +161,7 @@ test("the landing page offers the demonstration, presentation, and standards que
   await expect(page.getByRole("heading", { level: 1, name: "OpenInquiry" })).toBeVisible();
   await expect(page.getByRole("heading", {
     level: 2,
-    name: "Bring your agent to publisher content. The publisher decides what it can use.",
+    name: "Bring your own agent to trusted publisher content. The publisher decides what your agent receives.",
   })).toBeVisible();
   const principles = page.getByRole("list");
   await expect(principles.getByRole("listitem")).toHaveCount(3);
@@ -174,7 +174,7 @@ test("the landing page offers the demonstration, presentation, and standards que
     { exact: false },
   )).toBeVisible();
   await expect(principles.getByText(
-    "OpenInquiry builds on WebMCP so publishers can state what agents may access and how they may use it.",
+    "OpenInquiry builds on WebMCP so publishers can decide what their Site Tools return and can control the response.",
     { exact: false },
   )).toBeVisible();
   const destinationLinks = page
@@ -302,7 +302,7 @@ test("the next-steps page gives a concise and honest path beyond the reference d
   await expect(page.getByRole("heading", {
     name: "Give publishers clear choices.",
   })).toBeVisible();
-  await expect(page.getByText("should not impose a universal character ceiling", {
+  await expect(page.getByText("should not impose one character limit", {
     exact: false,
   })).toBeVisible();
   await expect(page.getByRole("heading", {
@@ -313,7 +313,7 @@ test("the next-steps page gives a concise and honest path beyond the reference d
     exact: false,
   })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Create an open standards process." })).toBeVisible();
-  await expect(page.getByText("not yet an interoperable standard", { exact: false })).toBeVisible();
+  await expect(page.getByText("Independent implementations are the next step toward interoperability", { exact: false })).toBeVisible();
   await expect.poll(() => registeredToolNames(page)).toEqual([]);
 });
 
@@ -323,7 +323,7 @@ test("the walkthrough explains the live demo one concise beat at a time", async 
   await page.waitForTimeout(100);
 
   await expect(page.getByRole("heading", {
-    name: "Act as a reader bringing ChatGPT to a medical journal.",
+    name: "You are a reader bringing ChatGPT to a medical journal.",
   })).toBeVisible();
   await expect(page.getByText("How the live demonstration works")).toBeVisible();
   await expect(page.getByRole("listitem")).toHaveCount(3);
@@ -340,22 +340,20 @@ test("the walkthrough explains the live demo one concise beat at a time", async 
   await expect(page.locator("footer").getByRole("button", { name: "Continue" })).toHaveCount(0);
   await continueButton.click();
   await expect(page.getByRole("heading", {
-    name: "The publisher checks two conditions before returning anything.",
+    name: "The publisher checks two conditions before deciding what to return.",
   })).toBeVisible();
-  await expect(page.getByLabel("Reader entitlement options").getByText("Not entitled", {
+  await expect(page.getByLabel("Reader entitlement options").getByText("Guest preview", {
     exact: true,
   })).toBeVisible();
-  await expect(page.getByLabel("Reader entitlement options").getByText("Entitled", {
+  await expect(page.getByLabel("Reader entitlement options").getByText("Full article access", {
     exact: true,
   })).toBeVisible();
-  await expect(page.getByText("Full guideline access", { exact: true })).toBeVisible();
   await expect(page.getByLabel("Proposed agent policy signal options").getByText("Not recognized by publisher", {
     exact: true,
   })).toBeVisible();
-  await expect(page.getByLabel("Proposed agent policy signal options").getByText("Recognized by publisher", {
+  await expect(page.getByLabel("Proposed agent policy signal options").getByText("Zero-retention claim recognized", {
     exact: true,
   })).toBeVisible();
-  await expect(page.getByText("Proposed zero-retention credential simulated", { exact: true })).toBeVisible();
   await expect(page.getByRole("radio", { name: "Full article access" })).toBeChecked();
   await expect(page.getByRole("radio", { name: "No qualifying credential recognized" })).toBeChecked();
   await expect(page.getByText("Current", { exact: true })).toHaveCount(0);
@@ -392,12 +390,16 @@ test("the walkthrough explains the live demo one concise beat at a time", async 
   await expect(page.getByText("How the live demonstration works", { exact: true })).toHaveCount(0);
   await expect(page.getByRole("listitem")).toHaveCount(5);
   await expect(page.getByText(
-    "Use Demo Controls to change reader access and the simulated policy signal.",
+    "Open Demo controls and change reader access or publisher recognition.",
     { exact: true },
   )).toBeVisible();
-  await expect(page.getByText("Copy the question and agent instruction.", {
+  await expect(page.getByText("Copy the prompt below.", {
     exact: true,
   })).toBeVisible();
+  await expect(page.getByText(
+    "Ask the same question again and compare what the publisher returns.",
+    { exact: true },
+  )).toBeVisible();
   const journalInstruction = page.getByText(
     "Paste the prompt into this browser’s agent.",
     { exact: true },
@@ -409,7 +411,7 @@ test("the walkthrough explains the live demo one concise beat at a time", async 
     return [...range.getClientRects()].length;
   });
   expect(journalInstructionLineCount).toBe(1);
-  await expect(page.getByRole("listitem").nth(3).getByRole("button", {
+  await expect(page.getByRole("listitem").nth(0).getByRole("button", {
     name: "Copy prompt",
   })).toBeVisible();
   await expect(page.getByText("Question", { exact: true })).toBeVisible();
@@ -482,7 +484,7 @@ test("the walkthrough stays composed in a wide, short Chrome window", async ({ p
   };
 
   const firstHeading = page.getByRole("heading", {
-    name: "Act as a reader bringing ChatGPT to a medical journal.",
+    name: "You are a reader bringing ChatGPT to a medical journal.",
   });
   expect(Number.parseFloat(await firstHeading.evaluate(
     (element) => getComputedStyle(element).fontSize,
@@ -649,7 +651,7 @@ test("an external agent can find the guideline, open the article, and receive a 
   await expect.poll(() => registeredToolNames(page)).toEqual(expectedArticleTools);
   await expect(page.getByRole("heading", { name: "Physical Activity for Adults", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: "Demo controls" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Ask your agent to use the article." }))
+  await expect(page.getByRole("heading", { name: "Ask your agent to retrieve the guideline." }))
     .toHaveCount(0);
   await expect(page.getByRole("heading", {
     name: "Full article for you. Public material for your agent.",
@@ -659,7 +661,7 @@ test("an external agent can find the guideline, open the article, and receive a 
     "The publisher did not provide protected guideline text to the agent.",
     { exact: true },
   )).toBeVisible();
-  await expect(page.getByRole("heading", { name: "What the publisher gave the agent", exact: true }))
+  await expect(page.getByRole("heading", { name: "What the publisher returned to the agent", exact: true }))
     .toHaveCount(0);
   await expect(page.getByRole("heading", { name: "Abstract", exact: true })).toBeVisible();
   await expect(page.getByText("Objective", { exact: true })).toBeVisible();
@@ -688,16 +690,16 @@ test("an external agent can find the guideline, open the article, and receive a 
   await evidenceLauncher.scrollIntoViewIfNeeded();
   const articleScrollPosition = await page.evaluate(() => window.scrollY);
   await evidenceLauncher.click();
-  await expect(page.getByRole("dialog", { name: "What the publisher gave the agent" }))
+  await expect(page.getByRole("dialog", { name: "What the publisher returned to the agent" }))
     .toBeVisible();
-  await expect(page.getByRole("heading", { name: "What the publisher gave the agent", exact: true }))
+  await expect(page.getByRole("heading", { name: "What the publisher returned to the agent", exact: true }))
     .toBeVisible();
   await expect(page.getByText(
-    "Everything the publisher supplied through Site Tools is shown below. The response does not include the complete article.",
+    "Everything the publisher returned through Site Tools appears below. The response does not include the complete article.",
     { exact: true },
   )).toBeVisible();
   await page.getByRole("button", { name: "Close" }).click();
-  await expect(page.getByRole("dialog", { name: "What the publisher gave the agent" }))
+  await expect(page.getByRole("dialog", { name: "What the publisher returned to the agent" }))
     .not.toBeVisible();
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(articleScrollPosition);
   await expect(page.getByRole("button", { name: "See what the agent received" })).toBeFocused();
@@ -713,7 +715,7 @@ test("an external agent can find the guideline, open the article, and receive a 
   );
   await expect(page.locator("#weekly-activity-recommendation")).toBeFocused();
   await page.getByRole("button", { name: "See what the agent received" }).click();
-  const evidenceRegion = page.getByRole("region", { name: "What the publisher gave the agent" });
+  const evidenceRegion = page.getByRole("region", { name: "What the publisher returned to the agent" });
   const policyMapping = page.getByRole("region", {
     name: "Selected access conditions and resulting publisher behavior",
   });
@@ -747,7 +749,7 @@ test("an external agent can find the guideline, open the article, and receive a 
   })).toBeVisible();
 
   await page.getByRole("button", { name: "Demo controls" }).click();
-  await expect(page.getByRole("dialog", { name: "Ask your agent to use the article." }))
+  await expect(page.getByRole("dialog", { name: "Ask your agent to retrieve the guideline." }))
     .toBeVisible();
   await expect(page.getByText(
     PUBLISHER_DECIDES_FOLLOW_UP_QUESTIONS["journal-guideline-2026-041"],
@@ -776,12 +778,12 @@ test("an external agent can find the guideline, open the article, and receive a 
     exact: true,
   })).toBeVisible();
   await expect(page.getByText(
-    "The publisher recognized the simulated credential and supplied the complete article for transient, attributed use under its stated rights policy.",
+    "The publisher recognized the simulated zero-retention claim and returned the complete article with attribution and stated use limits.",
   )).toBeVisible();
   await page.getByRole("button", { name: "See what the agent received" }).click();
   await expect(page.getByText("Complete article text", { exact: true }).first()).toBeVisible();
   await expect(page.getByText(
-    "The reader keeps full article access. After recognizing the simulated credential, the publisher supplied the agent with the complete article for transient, attributed use.",
+    "The reader keeps full article access. Because the publisher recognizes the simulated zero-retention claim, it returns the complete article to the agent with attribution and stated use limits.",
     { exact: true },
   )).toBeVisible();
 
@@ -792,7 +794,7 @@ test("an external agent can find the guideline, open the article, and receive a 
   await expect(page.getByRole("heading", { name: "Abstract", exact: true })).toBeVisible();
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(250);
   await page.getByRole("button", { name: "See what the agent received" }).click();
-  await expect(page.getByRole("heading", { name: "What the publisher gave the agent" }))
+  await expect(page.getByRole("heading", { name: "What the publisher returned to the agent" }))
     .toBeVisible();
   await expect(page.getByText("Complete article text", { exact: true }).first()).toBeVisible();
 
@@ -805,7 +807,7 @@ test("an external agent can find the guideline, open the article, and receive a 
     exact: true,
   })).toBeVisible();
   await freshTab.getByRole("button", { name: "See what the agent received" }).click();
-  await expect(freshTab.getByRole("heading", { name: "What the publisher gave the agent" }))
+  await expect(freshTab.getByRole("heading", { name: "What the publisher returned to the agent" }))
     .toBeVisible();
   await freshTab.close();
 });
@@ -830,7 +832,7 @@ test("every journal homepage entry opens as a complete navigable guideline", asy
       .toBeVisible();
     await expect(page.getByText(recommendation, { exact: true })).toBeVisible();
     await page.getByRole("button", { name: "Demo controls" }).click();
-    await expect(page.getByRole("dialog", { name: "Ask your agent to use the article." }))
+    await expect(page.getByRole("dialog", { name: "Ask your agent to retrieve the guideline." }))
       .toBeVisible();
     const promptId = findJournalGuideline(resourceId)?.id;
     expect(promptId).toBeTruthy();
@@ -925,7 +927,7 @@ test("a WebMCP search can identify and open a non-primary guideline recommendati
   );
   await expect(page.locator("#blood-pressure-recommendations")).toBeFocused();
   await page.getByRole("button", { name: "See what the agent received" }).click();
-  await expect(page.getByRole("heading", { name: "What the publisher gave the agent", exact: true }))
+  await expect(page.getByRole("heading", { name: "What the publisher returned to the agent", exact: true }))
     .toBeVisible();
 });
 
@@ -977,8 +979,8 @@ test("guest access opens only the public WebMCP evidence package", async ({ page
   await expect(page.getByRole("heading", { name: "Abstract and citation" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Public preview" })).toHaveCount(0);
   await page.getByRole("button", { name: "See what the agent received" }).click();
-  await expect(page.getByRole("heading", { name: "What the publisher gave the agent" })).toBeVisible();
-  await expect(page.getByRole("region", { name: "What the publisher gave the agent" })
+  await expect(page.getByRole("heading", { name: "What the publisher returned to the agent" })).toBeVisible();
+  await expect(page.getByRole("region", { name: "What the publisher returned to the agent" })
     .getByText("Public abstract", { exact: true }).first()).toBeVisible();
 });
 
@@ -991,7 +993,7 @@ test("the four demo permutations produce four distinct provider evidence package
       policy: "No qualifying credential recognized",
       behavior: "Public abstract",
       headline: "Preview access for you. Public abstract for your agent.",
-      explanation: "The publisher did not provide the weekly minutes or strength-training frequency.",
+      explanation: "The publisher returned the public abstract, but not the protected weekly targets.",
       representations: ["abstract"],
     },
     {
@@ -999,7 +1001,7 @@ test("the four demo permutations produce four distinct provider evidence package
       policy: "Zero-retention claim recognized",
       behavior: "Expanded public preview",
       headline: "Preview access for you. A broader summary for your agent.",
-      explanation: "The publisher did not provide the weekly minutes or strength-training frequency.",
+      explanation: "The publisher returned the abstract and its summary, but not the protected weekly targets.",
       representations: ["abstract", "summary"],
     },
     {
@@ -1015,7 +1017,7 @@ test("the four demo permutations produce four distinct provider evidence package
       policy: "Zero-retention claim recognized",
       behavior: "Complete article text",
       headline: "Full article for you. Complete article for your agent.",
-      explanation: "The publisher recognized the simulated credential and supplied the complete article for transient, attributed use under its stated rights policy.",
+      explanation: "The publisher recognized the simulated zero-retention claim and returned the complete article with attribution and stated use limits.",
       representations: ["full_text"],
     },
   ] as const;
@@ -1115,7 +1117,7 @@ test("the four demo permutations produce four distinct provider evidence package
     await expect(policyMapping.getByText(mode.policy, { exact: true })).toBeVisible();
     await expect(policyMapping.getByText("Resulting publisher behavior", { exact: true })).toBeVisible();
     await expect(policyMapping.getByText(mode.behavior, { exact: true })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "What the publisher gave the agent" }))
+    await expect(page.getByRole("heading", { name: "What the publisher returned to the agent" }))
       .toBeVisible();
   }
 });

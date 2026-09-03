@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: "%s · OpenInquiry",
   },
   description:
-    "A focused demonstration of publisher-controlled, rights-aware knowledge access built on WebMCP.",
+    "A WebMCP demonstration of publisher-controlled access for users’ agents.",
   applicationName: "OpenInquiry",
   authors: [{ name: "OpenInquiry contributors" }],
   creator: "OpenInquiry contributors",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "OpenInquiry",
     description:
-      "Publishers decide what agents can use.",
+      "Publishers decide what agents receive.",
     siteName: "OpenInquiry",
     type: "website",
   },

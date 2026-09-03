@@ -206,7 +206,7 @@ export const journalGuidelines: SyntheticResource[] = [
         deepLinkPath:
           "/demo/article/journal-guideline-2026-041#disclosures-and-review-cycle",
         text:
-          "All organizations, contributors, evidence judgments, and disclosures in this guideline are fictional and were created for the OpenInquiry demonstration. No real professional society, publisher, institution, or clinical panel endorsed this content. The record is labeled not for clinical use.\n\nThe fictional editorial plan calls for surveillance of major new evidence and formal reassessment in 2029, with earlier review if a material safety concern or practice-changing body of evidence emerges. Corrections, updates, or withdrawal would be displayed on the canonical source record and returned through the same publication-status field used by the site’s knowledge tools.",
+          "All organizations, contributors, evidence judgments, and disclosures in this guideline are fictional and were created for the OpenInquiry demonstration. No real professional society, publisher, institution, or clinical panel endorsed this content. It is not for clinical use.\n\nThe fictional editorial plan calls for surveillance of major new evidence and formal reassessment in 2029, with earlier review if a material safety concern or practice-changing body of evidence emerges. Corrections, updates, or withdrawal would be displayed on the canonical source record and returned through the same publication-status field used by the site’s knowledge tools.",
         keywords: ["disclosures", "review cycle", "corrections", "not for clinical use"],
       },
     ],

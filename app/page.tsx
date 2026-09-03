@@ -8,7 +8,7 @@ import { ContactDisclosure } from "@/src/components/foundation/contact-disclosur
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "OpenInquiry · Publisher-controlled access for users’ agents",
+  title: "Publisher-controlled access for users’ agents",
   description:
     "OpenInquiry shows how WebMCP can help people bring their own agents to publisher content on the publisher’s terms.",
 };
@@ -22,7 +22,10 @@ export default function Home() {
         <div className={styles.copy}>
           <p className={styles.eyebrow}>A WebMCP proposal for publisher-controlled agent access</p>
           <h1>OpenInquiry</h1>
-          <h2>Bring your agent to publisher content. The publisher decides what it can use.</h2>
+          <h2>
+            Bring your own agent to trusted publisher content. The publisher decides what your
+            agent receives.
+          </h2>
           <ul className={styles.principles}>
             <li>
               WebMCP lets your agent request content on the publisher&apos;s live site.
@@ -32,8 +35,8 @@ export default function Home() {
               link, or nothing.
             </li>
             <li>
-              OpenInquiry builds on WebMCP so publishers can state what agents may access and how
-              they may use it.
+              OpenInquiry builds on WebMCP so publishers can decide what their Site Tools return
+              and can control the response.
             </li>
           </ul>
         </div>

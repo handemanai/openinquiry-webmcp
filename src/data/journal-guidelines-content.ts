@@ -138,7 +138,7 @@ export const additionalJournalGuidelines: SyntheticResource[] = [
       },
       {
         id: "executive-summary",
-        heading: "Summary",
+        heading: "Executive summary",
         text:
           "The fictional panel places measurement quality before escalation. A useful assessment connects repeated measurements with symptoms, medicines, comorbid conditions, cardiovascular risk, and the person’s preferences and practical circumstances.\n\nThe initial plan may include changes in daily routines, medicine, further assessment, or a combination of approaches. The publication emphasizes that the plan and the interval for review should be explicit enough that both the patient and the clinical team know what happens next.",
       },
@@ -224,7 +224,7 @@ export const additionalJournalGuidelines: SyntheticResource[] = [
       },
       {
         id: "executive-summary",
-        heading: "Summary",
+        heading: "Executive summary",
         text:
           "The fictional panel views screening as a process rather than a laboratory event. An invitation should explain why screening is being offered, what the result can and cannot establish, and what follow-up will be available.\n\nPrograms should avoid collecting tests they cannot confirm or connect to care. A screening pathway is incomplete if an abnormal result is delivered without a clear plan or if a normal result is allowed to imply that future reassessment will never be needed.",
       },
@@ -310,7 +310,7 @@ export const additionalJournalGuidelines: SyntheticResource[] = [
       },
       {
         id: "executive-summary",
-        heading: "Summary",
+        heading: "Executive summary",
         text:
           "The fictional panel places the care setting and severity context before antibiotic selection. Treatment should reflect the working diagnosis, recent care and medicine exposure, allergies and interactions, relevant organ function, microbiology when available, and the ability to return if the course changes.\n\nThe initial decision should include a review plan. Lack of improvement is not automatically proof that a broader antibiotic is needed; it is a reason to reconsider the diagnosis, complications, adherence, absorption, resistance, and whether the care setting remains appropriate.",
       },
@@ -396,7 +396,7 @@ export const additionalJournalGuidelines: SyntheticResource[] = [
       },
       {
         id: "executive-summary",
-        heading: "Summary",
+        heading: "Executive summary",
         text:
           "The fictional panel recommends treating vaccination status as a reconciled record rather than a yes-or-no question. A useful review distinguishes documented doses, credible history, uncertain history, known reactions, and information that still needs to be obtained.\n\nThe current schedule should then be applied to the person’s age, health, risk, prior vaccination, and circumstances. When more than one visit is needed, the plan should say what is due now, what comes later, and who is responsible for closing the loop.",
       },

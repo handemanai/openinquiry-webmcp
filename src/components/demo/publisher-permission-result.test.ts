@@ -18,7 +18,8 @@ describe("buildPermissionResultCopy", () => {
       "Preview access for you.",
       "Public abstract for your agent.",
     ]);
-    expect(copy.explanation).toContain("weekly minutes or strength-training frequency");
+    expect(copy.explanation).toContain("returned the public abstract");
+    expect(copy.explanation).toContain("protected weekly targets");
     expect(copy.explanation).not.toContain("remain unavailable");
   });
 

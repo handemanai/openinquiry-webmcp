@@ -13,14 +13,14 @@ export const PRESENTATION_BEATS = [
     id: "opening-provocation",
     eyebrow: "A WebMCP proposal",
     title: "OpenInquiry",
-    body: "OpenInquiry is a proposal built on experimental WebMCP so people can bring their own agents to expert content on the source's terms.",
+    body: "OpenInquiry builds on experimental WebMCP so people can bring their own agents to expert content on the publisher's terms.",
     visualBeat: 15,
   },
   {
     id: "three-parties",
     eyebrow: "The relationship",
     title: "Any solution has to work for all three.",
-    body: "The goal is simple: the publisher sets the terms, the human brings their own agent, and the agent receives only what those terms allow.",
+    body: "The publisher sets the terms. The person brings their own agent. The agent receives only what the publisher permits.",
     visualBeat: 16,
   },
   {
@@ -41,7 +41,7 @@ export const PRESENTATION_BEATS = [
     id: "agent-era",
     eyebrow: "Your agent today",
     title: "Your access does not automatically extend to your agent.",
-    body: "Your subscriptions, society memberships, and hospital-library access do not automatically extend to your agent.",
+    body: "A subscription, society membership, or hospital-library login lets you read the content. It does not create an authorized path for your agent.",
     visualBeat: 4,
   },
   {
@@ -54,14 +54,14 @@ export const PRESENTATION_BEATS = [
   {
     id: "vision",
     eyebrow: "The OpenInquiry vision",
-    title: "Your agent uses your access on the publisher’s terms.",
-    body: "The publisher controls what its Site Tools return.\nThe physician can view the publisher’s content using their own signed-in access.",
+    title: "Your agent works through the publisher’s signed-in site.",
+    body: "The reader keeps full access in the publisher’s own experience.\nThe publisher decides what its Site Tools return to the agent.",
     visualBeat: 6,
   },
   {
     id: "webmcp-and-openinquiry",
     eyebrow: "The connection",
-    title: "WebMCP connects the reader’s agent to the publisher’s page.\nOpenInquiry would let the publisher decide what the agent gets.",
+    title: "WebMCP creates the connection.\nOpenInquiry defines the publisher’s response.",
     body: "The reader uses the agent they choose.\nThe publisher remains the source and keeps its relationship with the reader.",
     visualBeat: 17,
   },
@@ -69,14 +69,14 @@ export const PRESENTATION_BEATS = [
     id: "policy-inputs",
     eyebrow: "Example publisher policy",
     title: "The publisher can consider two signals.",
-    body: "In this example, it checks the reader entitlement and a proposed, independently issued agent data-handling credential. The judge controls that simulated state here; WebMCP does not verify it.",
+    body: "In this demonstration, the publisher considers the reader’s access and whether it recognizes a proposed credential about the agent’s data handling. The judge controls that simulated credential; WebMCP does not verify it.",
     visualBeat: 7,
   },
   {
     id: "permission-set",
     eyebrow: "Example publisher policy",
     title: "This demo maps those conditions to four exact results.",
-    body: "These are publisher-selected representations, not a WebMCP default or universal character ceiling. Every result also carries provenance and a canonical source link.",
+    body: "The publisher chooses among four response types. These are demonstration policy choices, not WebMCP defaults. Every response identifies the source and links back to it.",
     visualBeat: 8,
   },
   {
@@ -97,21 +97,21 @@ export const PRESENTATION_BEATS = [
     id: "signed-in-zdr",
     eyebrow: "Example publisher policy",
     title: "Both conditions are required for complete article text.",
-    body: "Full article access plus Zero-retention claim recognized returns the complete article to the agent in this fictional policy. Rights limits still prohibit storage, redistribution, training, and bulk export.",
+    body: "When the reader has full article access and the publisher recognizes the simulated zero-retention claim, the agent receives the complete article. The publisher’s terms still prohibit storage, redistribution, training, and bulk export.",
     visualBeat: 11,
   },
   {
     id: "standards-provocation",
     eyebrow: "The proposal",
     title: "Why build OpenInquiry on WebMCP?",
-    body: "WebMCP lets the publisher define what its live, signed-in Site Tools do. OpenInquiry would define the rights-aware result those tools return to the agent.",
+    body: "WebMCP lets the publisher expose controlled tools on its live, signed-in site. OpenInquiry proposes a shared response format for the content, source, status, rights, and links those tools return.",
     visualBeat: 18,
   },
   {
     id: "authorized-return",
     eyebrow: "The result",
     title: "Bring your own agent. The publisher still sets the terms.",
-    body: "Your agent works through the live publisher site and receives only the evidence the publisher permits, with provenance and a canonical source link.",
+    body: "Your agent works through the live publisher site and receives only what the publisher permits. Every response identifies the source and links back to it.",
     visualBeat: 14,
   },
 ] as const;
@@ -476,7 +476,7 @@ function SourceAccessPorts() {
         </text>
         <g className={`${styles.accessPortState} ${styles.agentAccessStateOpening}`}>
           <text className={styles.accessPortStateText} textAnchor="middle" x="1155" y="355">
-            AGENT USES USER ACCESS
+            SITE APPLIES READER’S SIGN-IN
           </text>
         </g>
         <g className={`${styles.accessPortState} ${styles.agentAccessStateDenied}`}>
@@ -491,7 +491,7 @@ function SourceAccessPorts() {
         </g>
         <g className={`${styles.accessPortState} ${styles.agentAccessStatePhysician}`}>
           <text className={styles.accessPortStateText} textAnchor="middle" x="1155" y="355">
-            AGENT USES PHYSICIAN ACCESS
+            SITE APPLIES PHYSICIAN’S SIGN-IN
           </text>
         </g>
         <g className={`${styles.accessPortState} ${styles.agentAccessStateReaderSession}`}>
@@ -530,8 +530,8 @@ function PolicyFocus() {
               The publisher can consider two signals.
             </text>
             <text className={styles.policyFocusBody} x="270" y="190">
-              <tspan x="270">In this example, it checks the reader entitlement and whether it recognizes a</tspan>
-              <tspan x="270" dy="30">proposed agent credential. This demo simulates that external signal.</tspan>
+              <tspan x="270">The publisher considers the reader’s access and whether it recognizes a</tspan>
+              <tspan x="270" dy="30">proposed agent credential. The judge controls that simulated credential.</tspan>
             </text>
           </g>
           <g className={`${styles.policyFocusBeatTitle} ${styles.policyFocusBeat8Title}`}>
@@ -539,8 +539,8 @@ function PolicyFocus() {
               This demo maps those conditions to four exact results.
             </text>
             <text className={styles.policyFocusBody} x="270" y="190">
-              <tspan x="270">Publisher-selected representations—not a WebMCP default or universal character ceiling.</tspan>
-              <tspan x="270" dy="30">Every result also carries provenance and a canonical source link.</tspan>
+              <tspan x="270">The publisher chooses among four response types. These are demonstration policy choices,</tspan>
+              <tspan x="270" dy="30">not WebMCP defaults. Every response identifies the source and links back to it.</tspan>
             </text>
           </g>
           <g className={`${styles.policyFocusBeatTitle} ${styles.policyFocusBeat9Title}`}>
@@ -566,8 +566,8 @@ function PolicyFocus() {
               Both conditions are required for complete article text.
             </text>
             <text className={styles.policyFocusBody} x="270" y="190">
-              <tspan x="270">Full article access plus Zero-retention claim recognized returns the complete article.</tspan>
-              <tspan x="270" dy="30">Storage, redistribution, training, and bulk export remain prohibited.</tspan>
+              <tspan x="270">Full article access plus a recognized zero-retention claim returns the complete article.</tspan>
+              <tspan x="270" dy="30">The publisher still prohibits storage, redistribution, training, and bulk export.</tspan>
             </text>
           </g>
           <path className={styles.policyFocusDivider} d="M270 250 H1330" />
@@ -716,8 +716,8 @@ function OpeningProvocation() {
 
       <g className={`${styles.openingProvocationLine} ${styles.openingPublisherLine}`}>
         <text className={styles.openingProvocationText} textAnchor="end" x="1390" y="284">
-          <tspan x="1390">Publishers want to protect their IP</tspan>
-          <tspan x="1390" dy="56">and avoid disintermediation.</tspan>
+          <tspan x="1390">Publishers want to protect their work</tspan>
+          <tspan x="1390" dy="56">and keep their relationship with readers.</tspan>
         </text>
       </g>
 
@@ -837,10 +837,10 @@ function StandardsProvocation() {
 
 function AnchoredRelationshipDiagram({ visualBeat }: { visualBeat: number }) {
   const descriptions: Record<number, string> = {
-    15: "People want to bring their own agents to publisher content. Publishers want to protect their intellectual property and avoid disintermediation. The slide asks whether WebMCP can let publishers control how users’ agents access their content.",
+    15: "People want to bring their own agents to publisher content. Publishers want to protect their work and keep their relationship with readers. The slide asks whether WebMCP can let publishers control how users’ agents access their content.",
     16: "Three participants share the relationship: the publisher, the human, and the human's agent. No connections are shown yet.",
-    17: "The relationship remains visible but recedes around the emphasized agent-to-publisher connection. WebMCP connects the reader’s agent to the publisher’s page. OpenInquiry would let the publisher decide what the agent gets, so the reader can use the agent they choose while the publisher remains the source and keeps its relationship with the reader.",
-    18: "The closing proposal explains why OpenInquiry would build on WebMCP. The publisher’s live, signed-in site remains in the interaction, and the publisher defines what its Site Tools do. OpenInquiry would define shared response formats, access rules, permitted content, and how an independently governed agent data-handling credential could be checked.",
+    17: "The relationship remains visible but recedes around the emphasized agent-to-publisher connection. WebMCP creates the connection, and OpenInquiry defines the publisher’s response, so the reader can use the agent they choose while the publisher remains the source and keeps its relationship with the reader.",
+    18: "The closing proposal explains why OpenInquiry would build on WebMCP. The publisher’s live, signed-in site remains in the interaction, and the publisher defines what its Site Tools do. OpenInquiry proposes a shared response format for the content, source, status, rights, and links those tools return.",
   };
   const existingDescriptions = [
     "A Human signs in to a Publisher, their Agent uses that access through WebMCP, and the Human and Agent exchange labeled requests and responses.",
@@ -849,14 +849,14 @@ function AnchoredRelationshipDiagram({ visualBeat }: { visualBeat: number }) {
     "A Physician can work with their own Agent, but the source access check finds no authorized path for the Agent to use the physician’s permissioned publisher content.",
     "An Agent with direct content partnerships queries participating publishers and returns a grounded answer with permitted source material. The physician can follow a canonical link to the publisher under their own signed-in access.",
     "The physician’s own Agent uses the physician’s signed-in access through WebMCP. The Publisher returns permitted content and keeps a visible set of relevant sources assembled for the physician to review.",
-    "The publisher can consider two signals: the reader entitlement and a proposed, independently issued agent data-handling credential. The judge controls that simulated signal in this demo; WebMCP does not verify it.",
-    "This demo maps the two conditions to four exact publisher-selected representations. They are not a WebMCP default or a universal character ceiling, and every result carries provenance and a canonical source link.",
+    "The publisher can consider two signals: the reader’s access and whether it recognizes a proposed credential about the agent’s data handling. The judge controls that simulated credential; WebMCP does not verify it.",
+    "This demo maps the two conditions to four exact results. The publisher chooses among four response types, which are demonstration policy choices rather than WebMCP defaults. Every response identifies the source and links back to it.",
     "Guest preview plus no qualifying credential recognized returns the public source record and abstract.",
     "The two single-condition outcomes are distinct. Guest preview plus recognized assurance returns the abstract and publisher summary. Full article access without recognized assurance returns the complete relevant section.",
-    "Full article access plus Zero-retention claim recognized returns complete article text in this fictional policy, while storage, redistribution, training, and bulk export remain prohibited.",
+    "When the reader has full article access and the publisher recognizes the simulated zero-retention claim, the agent receives the complete article. The publisher’s terms still prohibit storage, redistribution, training, and bulk export.",
     "The two single-condition outcomes are distinct. Guest preview plus recognized assurance returns the abstract and publisher summary. Full article access without recognized assurance returns the complete relevant section.",
-    "Full article access plus Zero-retention claim recognized returns complete article text in this fictional policy, while storage, redistribution, training, and bulk export remain prohibited.",
-    "The publisher policy panel contracts back into the relationship diagram. The physician's own agent uses the physician's access through WebMCP, while the publisher decides what the source returns.",
+    "When the reader has full article access and the publisher recognizes the simulated zero-retention claim, the agent receives the complete article. The publisher’s terms still prohibit storage, redistribution, training, and bulk export.",
+    "The publisher policy panel contracts back into the relationship diagram. The physician's own agent works through the signed-in publisher site, which decides what the source returns.",
   ] as const;
 
   const description = descriptions[visualBeat] ?? existingDescriptions[visualBeat - 1] ?? existingDescriptions[0];

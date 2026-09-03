@@ -35,7 +35,7 @@ type LoadingStateProps = {
 };
 
 export function LoadingState({
-  label = "Preparing this knowledge surface",
+  label = "Preparing OpenInquiry",
   inverse = false,
 }: LoadingStateProps) {
   return (
@@ -64,8 +64,8 @@ type ErrorStateProps = {
 };
 
 export function ErrorState({
-  title = "This surface did not load",
-  description = "This view is temporarily unavailable. Try it again when you are ready.",
+  title = "This page did not load",
+  description = "Try loading it again.",
   onRetry,
   inverse = false,
 }: ErrorStateProps) {
@@ -74,7 +74,7 @@ export function ErrorState({
       className={`state-panel state-panel--error${inverse ? " state-panel--inverse" : ""}`}
       role="alert"
     >
-      <p className="eyebrow">A recoverable interruption</p>
+      <p className="eyebrow">Temporary interruption</p>
       <h1>{title}</h1>
       <p>{description}</p>
       <div className="state-panel__actions">

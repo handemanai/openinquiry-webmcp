@@ -22,19 +22,19 @@ const priorities = [
     number: "02",
     title: "Give publishers clear choices.",
     body:
-      "Give publishers a menu of ways to share their content: full text, a complete section, an excerpt, a summary, basic details, a link, or no access. OpenInquiry should not impose a universal character ceiling; each publisher decides which representations it offers and any resource- or use-specific limits.",
+      "Let each publisher choose what to return: full text, a complete section, an excerpt, a summary, basic details, a link, or no additional content. OpenInquiry should not impose one character limit. Publishers should set limits by resource and permitted use.",
   },
   {
     number: "03",
     title: "Define what agents and browsers must prove.",
     body:
-      "WebMCP gives publishers a controlled tool path, but today an agent-capable browser may still read the visible page directly. Explore a publisher-recognized, browser-enforced mode that exposes protected text to the agent only through declared Site Tools while preserving the reader’s normal access. That assurance must be signed, scoped, revocable, and cover retention, training, onward sharing, and deletion. WebMCP does not provide this guarantee today, and a self-reported flag is not enough.",
+      "WebMCP gives publishers a controlled tool path, but an agent-capable browser may still read the visible page directly. Test a browser-enforced mode in which protected text reaches the agent only through declared Site Tools while the reader keeps normal access. Any credential used for that decision must be signed, scoped, and revocable, with explicit claims about retention, training, onward sharing, and deletion. WebMCP does not provide this guarantee today, and self-reporting is not enough.",
   },
   {
     number: "04",
     title: "Create an open standards process.",
     body:
-      "Publish changes and the reasons behind them. No single publisher, agent company, or OpenInquiry should control the process.",
+      "Publish proposed changes and the reasoning behind them. Governance should include publishers, readers, agent developers, and independent standards participants.",
   },
 ] as const;
 
@@ -51,9 +51,9 @@ export default function NextStepsPage() {
       <section className={styles.hero}>
         <h1>What needs to happen next.</h1>
         <p>
-          OpenInquiry now demonstrates the basic idea. The next work is to test it outside our own
-          reference site, make it easy for others to implement, and let the people it affects
-          shape the rules.
+          OpenInquiry now demonstrates the core idea. Next, it needs testing on independent
+          publisher sites, a simple implementation path, and an open process shaped by
+          publishers, readers, and agent developers.
         </p>
       </section>
 
@@ -68,7 +68,10 @@ export default function NextStepsPage() {
       </section>
 
       <footer className={styles.footer}>
-        <p>A tested proposal and reference implementation—not yet an interoperable standard.</p>
+        <p>
+          OpenInquiry is a tested proposal and reference implementation. Independent
+          implementations are the next step toward interoperability.
+        </p>
         <nav aria-label="Continue exploring OpenInquiry">
           <Link href="/presentation">
             View the presentation <span aria-hidden="true">→</span>

@@ -37,7 +37,7 @@ export function buildPermissionResultCopy({
       conditions: [readerCondition, policyCondition],
       headline: ["Full article for you.", "Complete article for your agent."],
       explanation:
-        "The publisher recognized the simulated credential and supplied the complete article for transient, attributed use under its stated rights policy.",
+        "The publisher recognized the simulated zero-retention claim and returned the complete article with attribution and stated use limits.",
     };
   }
 
@@ -46,7 +46,7 @@ export function buildPermissionResultCopy({
       conditions: [readerCondition, policyCondition],
       headline: ["Preview access for you.", "A broader summary for your agent."],
       explanation:
-        "The publisher did not provide the weekly minutes or strength-training frequency.",
+        "The publisher returned the abstract and its summary, but not the protected weekly targets.",
     };
   }
 
@@ -55,7 +55,7 @@ export function buildPermissionResultCopy({
       conditions: [readerCondition, policyCondition],
       headline: ["Preview access for you.", "Public abstract for your agent."],
       explanation:
-        "The publisher did not provide the weekly minutes or strength-training frequency.",
+        "The publisher returned the public abstract, but not the protected weekly targets.",
     };
   }
 

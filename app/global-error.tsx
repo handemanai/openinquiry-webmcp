@@ -14,7 +14,7 @@ export default function GlobalError({
         <main className="route-state">
           <ErrorState
             title="OpenInquiry could not start"
-            description="The application encountered a temporary problem before OpenInquiry could load."
+            description="OpenInquiry hit a temporary problem before the page could load."
             onRetry={reset}
           />
         </main>

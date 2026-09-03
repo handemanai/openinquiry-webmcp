@@ -3,8 +3,8 @@
 import { expect, test } from "@playwright/test";
 
 const CONNECTION_TITLE = [
-  "WebMCP connects the reader’s agent to the publisher’s page.",
-  "OpenInquiry would let the publisher decide what the agent gets.",
+  "WebMCP creates the connection.",
+  "OpenInquiry defines the publisher’s response.",
 ] as const;
 
 const CONNECTION_BODY = [
@@ -149,7 +149,7 @@ test("the policy sequence shows the exact four-state demo contract", async ({ pa
     await expect(results.getByText(result, { exact: true })).toBeVisible();
   }
   await expect(activeNarrative).toContainText(
-    "not a WebMCP default or universal character ceiling",
+    "These are demonstration policy choices, not WebMCP defaults.",
   );
 
   await page.goto("/presentation?beat=12");

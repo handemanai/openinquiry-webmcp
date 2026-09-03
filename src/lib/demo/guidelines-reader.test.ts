@@ -125,7 +125,7 @@ describe("guidelines human reader projection", () => {
       );
       expect(PUBLISHER_DECIDES_FOLLOW_UP_PROMPTS[guideline.id]).toContain("Site Tools");
       expect(PUBLISHER_DECIDES_FOLLOW_UP_PROMPTS[guideline.id]).toContain("exposed by this page");
-      expect(PUBLISHER_DECIDES_FOLLOW_UP_PROMPTS[guideline.id]).toContain("Request full_text");
+      expect(PUBLISHER_DECIDES_FOLLOW_UP_PROMPTS[guideline.id]).toContain("request full_text");
       if (guideline.id === "journal-guideline-2026-041") {
         expect(PUBLISHER_DECIDES_FOLLOW_UP_QUESTIONS[guideline.id]).not.toContain(
           guideline.title,

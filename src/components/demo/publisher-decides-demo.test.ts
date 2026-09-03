@@ -21,7 +21,7 @@ describe("PublisherDecidesDemo", () => {
     const html = renderToStaticMarkup(createElement(PublisherDecidesDemo));
 
     expect(html).toContain("How the live demonstration works");
-    expect(html).toContain("Act as a reader bringing ChatGPT to a medical journal.");
+    expect(html).toContain("You are a reader bringing ChatGPT to a medical journal.");
     expect(html).toContain("Open the medical journal.");
     expect(html).toContain("Ask one question.");
     expect(html).toContain("Watch the publisher answer.");
@@ -40,10 +40,11 @@ describe("PublisherDecidesDemo", () => {
     );
     expect(PUBLISHER_DECIDES_DISCOVERY_PROMPT).toContain("Site Tools");
     expect(PUBLISHER_DECIDES_DISCOVERY_PROMPT).toContain("exposed by this page");
-    expect(PUBLISHER_DECIDES_DISCOVERY_PROMPT).toContain("Request full_text");
+    expect(PUBLISHER_DECIDES_DISCOVERY_PROMPT).toContain("request full_text");
+    expect(PUBLISHER_DECIDES_DISCOVERY_PROMPT).toContain("pass this question as focusedQuery");
     expect(PUBLISHER_DECIDES_DISCOVERY_PROMPT).toContain("current status");
     expect(PUBLISHER_DECIDES_DISCOVERY_PROMPT).toContain("exact supporting section open");
-    expect(PUBLISHER_DECIDES_DISCOVERY_PROMPT).toContain("Do not fill gaps from model knowledge");
+    expect(PUBLISHER_DECIDES_DISCOVERY_PROMPT).toContain("Do not use model knowledge");
     expect(PUBLISHER_DECIDES_DISCOVERY_PROMPT).not.toContain("public abstract");
     expect(PUBLISHER_DECIDES_DISCOVERY_PROMPT).toContain("how much physical activity");
     expect(PUBLISHER_DECIDES_DISCOVERY_PROMPT).toContain("aerobic activity");
@@ -52,7 +53,7 @@ describe("PublisherDecidesDemo", () => {
     expect(PUBLISHER_DECIDES_FOLLOW_UP_PROMPT).toContain("leave the relevant section open.");
     expect(Object.values(PUBLISHER_DECIDES_FOLLOW_UP_PROMPTS)).toHaveLength(5);
     expect(Object.values(PUBLISHER_DECIDES_FOLLOW_UP_PROMPTS).every(
-      (prompt) => prompt.endsWith("ordinary page reading."),
+      (prompt) => prompt.endsWith("read the page directly to fill gaps."),
     )).toBe(true);
   });
 
@@ -77,9 +78,9 @@ describe("PublisherDecidesDemo", () => {
     expect(html).toContain("Demo controls");
     expect(html).toContain("Reader entitlement");
     expect(html).toContain("Publisher recognition");
-    expect(html).toContain("Judge-controlled simulation");
-    expect(html).toContain("an independent system would issue and govern the credential");
-    expect(html).toContain("WebMCP does not verify retention or training behavior");
+    expect(html).toContain("These controls stand in for two real systems");
+    expect(html).toContain("an independent service would issue and govern the credential");
+    expect(html).toContain("WebMCP itself does not verify retention or training behavior");
     expect(html).toContain("Copy prompt");
     expect(html).toContain("OpenInquiry home");
     expect(html).toContain('href="/"');

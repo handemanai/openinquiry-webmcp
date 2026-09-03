@@ -644,7 +644,7 @@ export function PublisherDecidesLive({
   const publisherBehaviorSummary = returnedGrants.length === 0
     ? "The publisher supplied no additional article text under these conditions."
     : hasFullTextGrant
-      ? "The reader keeps full article access. After recognizing the simulated credential, the publisher supplied the agent with the complete article for transient, attributed use."
+      ? "The reader keeps full article access. Because the publisher recognizes the simulated zero-retention claim, it returns the complete article to the agent with attribution and stated use limits."
     : readerEntitled && passageGrants.length > 0
       ? "The reader keeps full article access. Without a recognized agent credential, the publisher supplied the complete question-matched section rather than the complete article."
       : hasSummaryGrant
@@ -717,7 +717,7 @@ export function PublisherDecidesLive({
           {isFollowUpStep
             ? settingsChanged
               ? "Ask the same question again."
-              : "Ask your agent to use the article."
+              : "Ask your agent to retrieve the guideline."
             : "Compare what the publisher supplies."}
         </h2>
         <p className={styles.dialogIntro}>
@@ -725,7 +725,7 @@ export function PublisherDecidesLive({
             ? settingsChanged
               ? "The publisher’s conditions changed. Copy the same follow-up and run it again to compare the response."
               : "Copy this follow-up and run it in ChatGPT. Then change the simulated publisher-recognition state and ask the same question again."
-            : "Judge-controlled simulation: choose the reader’s access and whether this fictional publisher recognizes a proposed external agent credential. In a real system, the publisher site would read access from the signed-in session, and an independent system would issue and govern the credential. WebMCP does not verify retention or training behavior."}
+            : "Choose the reader’s access and whether the publisher recognizes the simulated agent credential. These controls stand in for two real systems: the publisher would read access from the signed-in session, and an independent service would issue and govern the credential. WebMCP itself does not verify retention or training behavior."}
         </p>
         <div className={styles.dialogControls}>
           <fieldset disabled={sessionPending}>
@@ -897,7 +897,7 @@ export function PublisherDecidesLive({
                   <strong>The publisher returned no additional article text.</strong>
                   <p>
                     {retrieveResponse?.error?.code === "RATE_LIMITED"
-                      ? "The bounded retrieval allowance for this session was reached. "
+                      ? "This session has reached the publisher’s retrieval limit. "
                       : "The publisher did not grant additional content for this request. "}
                     The reader’s complete article remains available below.
                   </p>
@@ -945,9 +945,9 @@ export function PublisherDecidesLive({
               <header className={styles.evidenceHeader}>
                 <div>
                   <p>Agent evidence</p>
-                  <h2 id="evidence-view-title">What the publisher gave the agent</h2>
+                  <h2 id="evidence-view-title">What the publisher returned to the agent</h2>
                   <span>
-                    Everything the publisher supplied through Site Tools is shown below. {hasFullTextGrant
+                    Everything the publisher returned through Site Tools appears below. {hasFullTextGrant
                       ? "The response includes the complete article."
                       : "The response does not include the complete article."}
                   </span>
@@ -972,7 +972,7 @@ export function PublisherDecidesLive({
                     </dl>
                   </div>
                   <div aria-hidden="true" className={styles.policyMapArrow}>
-                    <span>Publisher policy applies both</span>
+                    <span>Publisher policy evaluates both</span>
                     <b>→</b>
                   </div>
                   <div className={styles.policyOutcome}>
@@ -1013,12 +1013,12 @@ export function PublisherDecidesLive({
                 </ol>
               ) : (
                 <div className={styles.evidenceEmpty}>
-                  <strong>No source text has been retrieved in this view.</strong>
-                  <p>Run the prompt so the publisher can apply the current reader session and tool policy.</p>
+                  <strong>The publisher has not returned source text yet.</strong>
+                  <p>Run the prompt to see what the publisher returns under the current reader access and policy settings.</p>
                 </div>
               )}
               <p className={styles.evidenceBoundary}>
-                This record makes the policy visible: reader entitlement and agent assurance are evaluated separately.
+                The publisher evaluates reader access and the proposed agent credential separately.
               </p>
               {retrieveResponse ? (
                 <details className={styles.technicalDetails}>

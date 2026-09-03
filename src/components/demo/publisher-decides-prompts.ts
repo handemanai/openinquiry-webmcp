@@ -12,7 +12,7 @@ export const PUBLISHER_DECIDES_DISCOVERY_QUESTION =
   PUBLISHER_DECIDES_DISCOVERY_QUESTION_LINES.join(" ");
 
 export const PUBLISHER_DECIDES_AGENT_INSTRUCTION =
-  "Use only the Site Tools exposed by this page. Check the publication’s current status. Request full_text with this question as focusedQuery and accept any representation the publisher substitutes. Answer only from returned evidence, preserve attribution, and leave the exact supporting section open. Do not fill gaps from model knowledge or ordinary page reading.";
+  "Use only the Site Tools exposed by this page. First check the publication’s current status. Then request full_text, pass this question as focusedQuery, and accept whichever representation the publisher returns. Answer only from that response, preserve attribution, and leave the exact supporting section open. Do not use model knowledge or read the page directly to fill gaps.";
 
 function withAgentInstruction(question: string) {
   return `Question:\n${question}\n\nAgent instruction:\n${PUBLISHER_DECIDES_AGENT_INSTRUCTION}`;
