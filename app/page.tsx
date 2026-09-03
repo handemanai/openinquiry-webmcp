@@ -25,15 +25,15 @@ export default function Home() {
           <h2>Bring your agent to publisher content. The publisher decides what it can use.</h2>
           <ul className={styles.principles}>
             <li>
-              WebMCP gives agents useful tools on the publisher&apos;s live site.
+              WebMCP lets your agent request content on the publisher&apos;s live site.
             </li>
             <li>
-              The publisher&apos;s server decides whether to return a public abstract, a publisher
-              summary, a complete relevant section, complete article text, a link, or nothing.
+              The publisher decides what comes back: an abstract, summary, section, full article,
+              link, or nothing.
             </li>
             <li>
-              Every useful result keeps the author, current status, use limits, and exact
-              source page.
+              OpenInquiry builds on WebMCP so publishers can state what agents may access and how
+              they may use it.
             </li>
           </ul>
         </div>

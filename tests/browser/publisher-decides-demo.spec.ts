@@ -166,11 +166,15 @@ test("the landing page offers the demonstration, presentation, and standards que
   const principles = page.getByRole("list");
   await expect(principles.getByRole("listitem")).toHaveCount(3);
   await expect(principles.getByText(
-    "WebMCP gives agents useful tools on the publisher's live site.",
+    "WebMCP lets your agent request content on the publisher's live site.",
     { exact: false },
   )).toBeVisible();
   await expect(principles.getByText(
-    "complete relevant section, complete article text",
+    "The publisher decides what comes back: an abstract, summary, section, full article, link, or nothing.",
+    { exact: false },
+  )).toBeVisible();
+  await expect(principles.getByText(
+    "OpenInquiry builds on WebMCP so publishers can state what agents may access and how they may use it.",
     { exact: false },
   )).toBeVisible();
   const destinationLinks = page
