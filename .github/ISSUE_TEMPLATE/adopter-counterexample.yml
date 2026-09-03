@@ -1,0 +1,69 @@
+name: Adopter or use-case counterexample
+description: Show where a concrete stakeholder journey exposes a limit or ambiguity in OpenInquiry 0.1.
+title: "[Adopter counterexample]: "
+labels:
+  - question
+body:
+  - type: markdown
+    attributes:
+      value: |
+        OpenInquiry 0.1 is a discussion draft, not an adopted standard, certification, or adopter-ready profile. A counterexample is useful even without a complete solution.
+
+        Do not submit PHI, secrets, credentials, full prompts, private queries, paywalled text, or non-public exploit details. For a sensitive security matter, do not disclose it here: open only a sanitized coordination request that names the affected area and a safe contact method without operational details. This repository has no private reporting route.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: State the observed boundary in one or two sentences.
+    validations:
+      required: true
+  - type: dropdown
+    id: stakeholder
+    attributes:
+      label: Stakeholder and organization type
+      options:
+        - Publisher or rights holder
+        - Professional society, clinical, or editorial governance group
+        - Library, consortium, knowledge-base, or link-resolver operator
+        - Agent or browser client implementer
+        - Identity provider or federation participant
+        - Author, speaker, or creator
+        - Physician, researcher, or end user
+        - Standards or governance participant
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: journey
+    attributes:
+      label: Concrete browser-agent journey, resource, and authority
+      description: Use a public, synthetic, or permissioned example. Identify who owns, governs, supplies, or can change the relevant decision.
+    validations:
+      required: true
+  - type: textarea
+    id: observed-limit
+    attributes:
+      label: Present behavior and failure or ambiguity
+    validations:
+      required: true
+  - type: textarea
+    id: effects-evidence
+    attributes:
+      label: Important effects and evidence
+      description: Briefly note relevant privacy, security, accessibility, abuse, economic, or authority effects, plus public evidence that could validate or falsify the counterexample.
+  - type: textarea
+    id: possible-direction
+    attributes:
+      label: Possible direction (optional)
+      description: A proposed change is not required. If you have one, state the smallest compatible direction or the layer that should own it.
+  - type: textarea
+    id: affiliations
+    attributes:
+      label: Conflicts, affiliations, or contracts (optional)
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-content confirmation
+      options:
+        - label: I have removed PHI, secrets, credentials, full prompts, private queries, paywalled text, and non-public exploit details.
+          required: true

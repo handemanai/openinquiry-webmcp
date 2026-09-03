@@ -1,0 +1,490 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openinquiry.example/schemas/openinquiry-profile-0.1.schema.json",
+  "title": "OpenInquiry Publisher Knowledge Access Profile 0.1",
+  "description": "Discussion-draft contract. This schema does not establish a standard, license, entitlement system, or downstream compliance attestation.",
+  "$ref": "#/$defs/KnowledgeResponse",
+  "$defs": {
+    "RequestContextBase": {
+      "type": "object",
+      "properties": {
+        "profileVersion": { "const": "0.1" },
+        "requestId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9._:-]+$",
+          "description": "Opaque correlation ID only; never a prompt, query, or user identifier."
+        }
+      }
+    },
+    "KnowledgeDescribeRequest": {
+      "type": "object",
+      "allOf": [{ "$ref": "#/$defs/RequestContextBase" }],
+      "unevaluatedProperties": false
+    },
+    "KnowledgeAccessRequest": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/RequestContextBase" },
+        { "type": "object", "required": ["profileVersion"] }
+      ],
+      "unevaluatedProperties": false
+    },
+    "KnowledgeSearchRequest": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/RequestContextBase" },
+        {
+          "type": "object",
+          "properties": {
+            "query": { "type": "string", "minLength": 2, "maxLength": 300 },
+            "contentTypes": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/ContentType" },
+              "minItems": 1,
+              "maxItems": 6,
+              "uniqueItems": true
+            },
+            "publishedAfter": { "type": "string", "format": "date" },
+            "status": {
+              "type": "array",
+              "items": { "enum": ["current", "updated", "corrected", "retracted", "withdrawn"] },
+              "minItems": 1,
+              "maxItems": 5,
+              "uniqueItems": true
+            },
+            "limit": { "type": "integer", "minimum": 1, "maximum": 6 }
+          },
+          "required": ["profileVersion", "query"]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "RequestLocator": {
+      "type": "object",
+      "properties": {
+        "sectionTitle": { "type": "string", "minLength": 1, "maxLength": 240 },
+        "sectionId": { "type": "string", "minLength": 1, "maxLength": 160, "pattern": "^[A-Za-z0-9._:-]+$" },
+        "page": { "type": "string", "minLength": 1, "maxLength": 40, "pattern": "^[A-Za-z0-9 ._:-]+$" },
+        "figureId": { "type": "string", "minLength": 1, "maxLength": 160, "pattern": "^[A-Za-z0-9._:-]+$" },
+        "timestampSeconds": { "type": "number", "minimum": 0, "maximum": 86400 },
+        "timestampEndSeconds": { "type": "number", "minimum": 0, "maximum": 86400 },
+        "timestampLabel": { "type": "string", "minLength": 1, "maxLength": 24 }
+      },
+      "minProperties": 1,
+      "anyOf": [
+        {
+          "properties": { "sectionId": true },
+          "required": ["sectionId"]
+        },
+        {
+          "properties": { "page": true },
+          "required": ["page"]
+        },
+        {
+          "properties": { "figureId": true },
+          "required": ["figureId"]
+        },
+        {
+          "properties": { "timestampSeconds": true },
+          "required": ["timestampSeconds"]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "KnowledgeRetrieveRequest": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/RequestContextBase" },
+        {
+          "type": "object",
+          "properties": {
+            "resourceId": { "$ref": "#/$defs/RequestIdentifier" },
+            "requestedUse": {
+              "type": "array",
+              "items": { "enum": ["discover", "link", "quote", "summarize", "compare"] },
+              "minItems": 1,
+              "maxItems": 5,
+              "uniqueItems": true
+            },
+            "locator": { "$ref": "#/$defs/RequestLocator" },
+            "focusedQuery": { "type": "string", "minLength": 2, "maxLength": 300 },
+            "requestedRepresentation": {
+              "enum": ["metadata", "abstract", "summary", "full_text", "recommendation", "quotation", "figure_description", "transcript_segment"]
+            },
+            "maxCharacters": { "type": "integer", "minimum": 1 }
+          },
+          "required": ["profileVersion", "resourceId", "requestedRepresentation"],
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "requestedRepresentation": {
+                    "enum": ["full_text", "recommendation", "quotation", "figure_description", "transcript_segment"]
+                  }
+                },
+                "required": ["requestedRepresentation"]
+              },
+              "then": {
+                "anyOf": [
+                  {
+                    "properties": { "focusedQuery": true },
+                    "required": ["focusedQuery"]
+                  },
+                  {
+                    "properties": { "locator": true },
+                    "required": ["locator"]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "KnowledgeResolveRequest": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/RequestContextBase" },
+        {
+          "type": "object",
+          "properties": { "resourceId": { "$ref": "#/$defs/RequestIdentifier" } },
+          "required": ["profileVersion", "resourceId"]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "KnowledgeOpenRequest": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/RequestContextBase" },
+        {
+          "type": "object",
+          "properties": {
+            "resourceId": { "$ref": "#/$defs/RequestIdentifier" },
+            "locator": { "$ref": "#/$defs/RequestLocator" }
+          },
+          "required": ["profileVersion", "resourceId"]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "KnowledgeStatusRequest": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/RequestContextBase" },
+        {
+          "type": "object",
+          "properties": {
+            "resourceIds": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/RequestIdentifier" },
+              "minItems": 1,
+              "maxItems": 8,
+              "uniqueItems": true
+            }
+          },
+          "required": ["profileVersion", "resourceIds"]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "^[A-Za-z0-9._:/-]+$"
+    },
+    "RequestIdentifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9._:-]+$"
+    },
+    "HttpUrl": { "type": "string", "format": "uri", "pattern": "^https?://" },
+    "ContentType": {
+      "enum": ["journal_article", "book_chapter", "guideline", "consensus_statement", "video", "transcript", "conference_material", "other"]
+    },
+    "ResourceStatus": {
+      "enum": ["current", "updated", "corrected", "retracted", "withdrawn", "unknown"]
+    },
+    "ContentRepresentation": {
+      "enum": ["metadata", "abstract", "summary", "full_text", "recommendation", "quotation", "figure_description", "transcript_segment", "link_only"]
+    },
+    "ProviderIdentity": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/Identifier" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "role": { "enum": ["publisher", "society", "library", "repository", "other"] },
+        "canonicalUrl": { "$ref": "#/$defs/HttpUrl" },
+        "rightsHolderName": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "policyUrl": { "$ref": "#/$defs/HttpUrl" }
+      },
+      "required": ["id", "name", "role", "canonicalUrl"],
+      "additionalProperties": false
+    },
+    "ResourceLocator": {
+      "type": "object",
+      "properties": {
+        "sectionTitle": { "type": "string", "minLength": 1, "maxLength": 240 },
+        "sectionId": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "page": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "figureId": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "timestampSeconds": { "type": "number", "minimum": 0, "maximum": 86400 },
+        "timestampEndSeconds": { "type": "number", "minimum": 0, "maximum": 86400 },
+        "timestampLabel": { "type": "string", "minLength": 1, "maxLength": 24 }
+      },
+      "minProperties": 1,
+      "additionalProperties": false
+    },
+    "KnowledgeResource": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/Identifier" },
+        "type": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "title": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "authors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+              "identifier": { "type": "string", "minLength": 1, "maxLength": 200 }
+            },
+            "required": ["name"],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 100
+        },
+        "responsibleOrganization": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "containerTitle": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "identifiers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "scheme": { "type": "string", "minLength": 1, "maxLength": 40 },
+              "value": { "type": "string", "minLength": 1, "maxLength": 200 }
+            },
+            "required": ["scheme", "value"],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "canonicalUrl": { "$ref": "#/$defs/HttpUrl" },
+        "deepLink": { "$ref": "#/$defs/HttpUrl" },
+        "locator": { "$ref": "#/$defs/ResourceLocator" },
+        "dates": {
+          "type": "object",
+          "properties": {
+            "published": { "type": "string", "format": "date" },
+            "updated": { "type": "string", "format": "date" },
+            "checked": { "type": "string", "format": "date-time" }
+          },
+          "additionalProperties": false
+        },
+        "version": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "status": { "$ref": "#/$defs/ResourceStatus" },
+        "statusNote": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "statusUrl": { "$ref": "#/$defs/HttpUrl" }
+      },
+      "required": ["id", "type", "title", "authors", "canonicalUrl", "dates", "status"],
+      "additionalProperties": false
+    },
+    "AccessDecision": {
+      "type": "object",
+      "properties": {
+        "state": { "enum": ["public", "entitled", "limited", "not_entitled", "unknown"] },
+        "basis": { "enum": ["open_access", "public_web", "personal_subscription", "society_membership", "institutional_license", "library_resolution", "demo_session", "unknown"] },
+        "basisLabel": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "decidedBy": { "$ref": "#/$defs/Identifier" },
+        "validUntil": { "type": "string", "format": "date-time" }
+      },
+      "required": ["state", "basis", "decidedBy"],
+      "additionalProperties": false
+    },
+    "RightsDecision": {
+      "type": "object",
+      "properties": {
+        "policyId": { "$ref": "#/$defs/Identifier" },
+        "decision": { "enum": ["allow", "allow_with_limits", "deny"] },
+        "allowedUses": {
+          "type": "array",
+          "items": { "enum": ["display", "link", "quote", "summarize", "compare"] },
+          "uniqueItems": true
+        },
+        "prohibitedUses": {
+          "type": "array",
+          "items": { "enum": ["bulk_export", "redistribute", "persistent_storage", "model_training"] },
+          "uniqueItems": true
+        },
+        "limits": {
+          "type": "object",
+          "properties": {
+            "maxCharacters": { "type": "integer", "minimum": 1 },
+            "maxSegments": { "type": "integer", "minimum": 1 },
+            "expiresAt": { "type": "string", "format": "date-time" }
+          },
+          "minProperties": 1,
+          "additionalProperties": false
+        },
+        "attribution": {
+          "type": "object",
+          "properties": {
+            "required": { "type": "boolean" },
+            "text": { "type": "string", "minLength": 1, "maxLength": 500 },
+            "mustLinkToCanonical": { "type": "boolean" }
+          },
+          "required": ["required"],
+          "additionalProperties": false
+        },
+        "requestedHandling": {
+          "type": "object",
+          "properties": {
+            "retention": { "enum": ["transient_only", "provider_unspecified"] },
+            "training": { "enum": ["not_permitted", "provider_unspecified"] },
+            "verification": { "const": "not_verified_by_webmcp" }
+          },
+          "required": ["verification"],
+          "additionalProperties": false
+        },
+        "policyUrl": { "$ref": "#/$defs/HttpUrl" }
+      },
+      "required": ["policyId", "decision", "allowedUses", "attribution"],
+      "additionalProperties": false
+    },
+    "ContentGrant": {
+      "type": "object",
+      "properties": {
+        "resourceId": { "$ref": "#/$defs/Identifier" },
+        "representation": { "$ref": "#/$defs/ContentRepresentation" },
+        "content": { "type": "string", "minLength": 1 },
+        "locator": { "$ref": "#/$defs/ResourceLocator" },
+        "suppliedByProvider": { "const": true },
+        "contentDigest": { "type": "string", "minLength": 1, "maxLength": 160 }
+      },
+      "required": ["resourceId", "representation", "suppliedByProvider"],
+      "allOf": [
+        {
+          "if": { "properties": { "representation": { "const": "link_only" } }, "required": ["representation"] },
+          "then": {
+            "not": {
+              "properties": { "content": true },
+              "required": ["content"]
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "ProviderAction": {
+      "type": "object",
+      "properties": {
+        "type": { "enum": ["open", "deep_link", "sign_in", "join", "subscribe", "institutional_access", "purchase", "contact_library"] },
+        "label": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "url": { "$ref": "#/$defs/HttpUrl" },
+        "providerId": { "$ref": "#/$defs/Identifier" }
+      },
+      "required": ["type", "label", "url", "providerId"],
+      "additionalProperties": false
+    },
+    "ProfileError": {
+      "type": "object",
+      "properties": {
+        "code": { "enum": ["INVALID_REQUEST", "ENTITLEMENT_REQUIRED", "USE_NOT_PERMITTED", "RESOURCE_NOT_FOUND", "RESOURCE_RETRACTED", "RESOURCE_WITHDRAWN", "QUERY_TOO_BROAD", "REQUEST_TOO_LARGE", "SENSITIVE_QUERY_REJECTED", "RATE_LIMITED", "PROVIDER_UNAVAILABLE", "PROFILE_VERSION_UNSUPPORTED"] },
+        "message": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "field": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "retryable": { "type": "boolean" },
+        "retryAfterSeconds": { "type": "integer", "minimum": 1, "maximum": 86400 }
+      },
+      "required": ["code", "message"],
+      "additionalProperties": false
+    },
+    "ProfileWarning": {
+      "type": "object",
+      "properties": {
+        "code": { "enum": ["RESOURCE_CORRECTED", "RESOURCE_UPDATED", "STATUS_UNKNOWN", "CONTENT_TRUNCATED"] },
+        "message": { "type": "string", "minLength": 1, "maxLength": 500 }
+      },
+      "required": ["code", "message"],
+      "additionalProperties": false
+    },
+    "SourceReceipt": {
+      "type": "object",
+      "description": "Allowlisted provider-boundary decision record. Full prompts, queries, clinical context, tokens, and persistent universal user identifiers are not represented.",
+      "properties": {
+        "receiptId": { "$ref": "#/$defs/Identifier" },
+        "issuedAt": { "type": "string", "format": "date-time" },
+        "providerId": { "$ref": "#/$defs/Identifier" },
+        "toolName": { "enum": ["knowledge_describe", "knowledge_access", "knowledge_search", "knowledge_retrieve", "knowledge_resolve", "knowledge_open", "knowledge_status"] },
+        "resourceIds": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Identifier" },
+          "maxItems": 20,
+          "uniqueItems": true
+        },
+        "accessState": { "enum": ["public", "entitled", "limited", "not_entitled", "unknown"] },
+        "accessBasis": { "enum": ["open_access", "public_web", "personal_subscription", "society_membership", "institutional_license", "library_resolution", "demo_session", "unknown"] },
+        "policyId": { "$ref": "#/$defs/Identifier" },
+        "decision": { "enum": ["supplied", "limited", "denied", "metadata_only"] },
+        "returnedUnitDigest": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "retention": { "enum": ["session", "provider_policy"] }
+      },
+      "required": ["receiptId", "issuedAt", "providerId", "toolName", "resourceIds", "decision", "retention"],
+      "additionalProperties": false
+    },
+    "KnowledgeResponse": {
+      "type": "object",
+      "properties": {
+        "profile": {
+          "type": "object",
+          "properties": {
+            "name": { "const": "openinquiry.publisher-knowledge-access" },
+            "version": { "const": "0.1" },
+            "schemaUrl": { "$ref": "#/$defs/HttpUrl" },
+            "supportedVersions": {
+              "type": "array",
+              "items": { "const": "0.1" },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": ["name", "version"],
+          "additionalProperties": false
+        },
+        "status": { "enum": ["ok", "limited", "denied", "not_found", "error"] },
+        "provider": { "$ref": "#/$defs/ProviderIdentity" },
+        "access": { "$ref": "#/$defs/AccessDecision" },
+        "rights": { "$ref": "#/$defs/RightsDecision" },
+        "resources": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/KnowledgeResource" },
+          "maxItems": 20
+        },
+        "grants": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ContentGrant" },
+          "maxItems": 20
+        },
+        "receipt": { "$ref": "#/$defs/SourceReceipt" },
+        "actions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ProviderAction" },
+          "maxItems": 20
+        },
+        "warnings": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ProfileWarning" },
+          "maxItems": 20
+        },
+        "error": { "$ref": "#/$defs/ProfileError" }
+      },
+      "required": ["profile", "status", "provider", "receipt"],
+      "additionalProperties": false
+    }
+  }
+}

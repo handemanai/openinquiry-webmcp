@@ -1,0 +1,95 @@
+name: Contract or semantic proposal
+description: Propose a narrowly scoped, testable change to the OpenInquiry profile or its boundaries.
+title: "[Contract proposal]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        OpenInquiry 0.1 is a discussion draft. This form starts a public design discussion; it does not create a governance decision, adoption, certification, or response SLA.
+
+        Do not submit PHI, secrets, credentials, full prompts, private queries, paywalled text, or non-public exploit details. For sensitive security matters, open only a sanitized coordination request with no operational details because this repository has no private reporting route.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+    validations:
+      required: true
+  - type: dropdown
+    id: stakeholder
+    attributes:
+      label: Stakeholder and organization type
+      options:
+        - Publisher or rights holder
+        - Professional society, clinical, or editorial governance group
+        - Library, consortium, knowledge-base, or link-resolver operator
+        - Agent or browser client implementer
+        - Identity provider or federation participant
+        - Author, speaker, or creator
+        - Physician, researcher, or end user
+        - Privacy, security, or abuse reviewer
+        - Standards or governance participant
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Browser-agent journey, resource, and institution(s) with authority
+      description: Use a public, synthetic, or permissioned example.
+    validations:
+      required: true
+  - type: textarea
+    id: defect
+    attributes:
+      label: Present behavior and failure, ambiguity, or normative defect
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Minimum interoperable change and alternatives
+      description: Compare no change, the smallest compatible change, and any breaking, extension, or external-system alternative that matters.
+    validations:
+      required: true
+  - type: checkboxes
+    id: layer
+    attributes:
+      label: Correct layer
+      options:
+        - label: WebMCP
+        - label: OpenInquiry core
+        - label: OpenInquiry extension
+        - label: Provider application
+        - label: Client commitment
+        - label: External identity, rights, status, or governance infrastructure
+  - type: checkboxes
+    id: compatibility
+    attributes:
+      label: Compatibility
+      options:
+        - label: 0.1 clarification
+        - label: Breaking 0.2 candidate
+        - label: Optional extension
+        - label: Informative mapping only
+  - type: textarea
+    id: effects
+    attributes:
+      label: Privacy, security, accessibility, abuse, economic, and authority effects
+      description: State who gains or loses control, newly exposed or persistent data, payload cost, and implementation burden.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence-conflicts
+    attributes:
+      label: Evidence, fixtures, primary sources, and relevant conflicts
+      description: Include public validation or falsification evidence, the smallest independent-implementation counterexample when applicable, and affiliations or contracts that materially affect the proposal.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-content confirmation
+      options:
+        - label: I have removed PHI, secrets, credentials, full prompts, private queries, paywalled text, and non-public exploit details.
+          required: true

@@ -1,0 +1,140 @@
+{
+  "format": "openinquiry-independent-evaluator-manifest/0.1",
+  "pack": {
+    "name": "OpenInquiry 0.1 External-Adapter Evaluator Pack",
+    "version": "0.1.0",
+    "profileName": "openinquiry.publisher-knowledge-access",
+    "profileVersion": "0.1",
+    "evidenceOnly": true,
+    "certification": false,
+    "licenses": {
+      "executableCodeAndVectorDefinitions": "Apache-2.0",
+      "syntheticFixtureContentAndDocumentation": "CC-BY-4.0",
+      "map": "evaluator/LICENSE-MAP.md"
+    }
+  },
+  "runtime": {
+    "minimumNodeMajor": 22,
+    "ciMatchedNodeMajor": 22,
+    "applicationMinimumNode": "22.6.0",
+    "existingDependencies": {
+      "ajv": "8.20.0",
+      "ajv-formats": "3.0.1"
+    }
+  },
+  "digestAlgorithm": "sha256",
+  "manifestDigestRule": "SHA-256 of recursively key-sorted compact JSON after removing only the top-level manifestDigest field",
+  "files": [
+    {
+      "path": "evaluator/ADAPTER_CONTRACT.md",
+      "role": "adapter I/O contract",
+      "sha256": "43dd3eaf65361846311dfa0ae84749a84762774d9f17558d832fc26e049d7a20"
+    },
+    {
+      "path": "evaluator/LICENSE-MAP.md",
+      "role": "machine-readable file-class license explanation",
+      "sha256": "e7f3d522632b6d0f85b5f1b601f72f06b160c83151d009707e78903afaa39d57"
+    },
+    {
+      "path": "evaluator/README.md",
+      "role": "pack instructions and claim boundary",
+      "sha256": "037e6e08e3041f07a8bb81d9eacebbbced427d38d6301325bf051431b3835a40"
+    },
+    {
+      "path": "evaluator/adapter-runtime.mjs",
+      "role": "adapter protocol runtime",
+      "sha256": "583dee6648d2c04926673f21b69ad937d02e4ee660b733bd2a08ad9159fd5342"
+    },
+    {
+      "path": "evaluator/adapters/process-failure-adapter.mjs",
+      "role": "deliberately failing process-boundary controls",
+      "sha256": "24d3e892219a42e883945f94ef0308fab9e264ab241d56db8838d404a8865c29"
+    },
+    {
+      "path": "evaluator/adapters/reference-adapter.mjs",
+      "role": "passing reference adapter",
+      "sha256": "209f92b431b921457e544270c6e4a9946a54886962c8153d64072c908cef56a7"
+    },
+    {
+      "path": "evaluator/adapters/rewriting-adapter.mjs",
+      "role": "deliberately failing preservation control",
+      "sha256": "3b85f8d9ae16e3a3c89d114ed7de442bf5e883117678817a490e19553b1304ac"
+    },
+    {
+      "path": "evaluator/canonical-validation.mjs",
+      "role": "canonical schema and semantic validator bridge",
+      "sha256": "77d31c9d015e3b3b43bd4d6b28060a021be32ef2fd8b954821f6c99de1b75eac"
+    },
+    {
+      "path": "evaluator/fixtures/base-responses.json",
+      "role": "provider-neutral synthetic base responses",
+      "sha256": "86357506829953423b59fc0424f87269e40cabeda345b4287af904680ec580b3"
+    },
+    {
+      "path": "evaluator/run.mjs",
+      "role": "deterministic evaluator runner",
+      "sha256": "6393af86783c2ab6f53cc91a842d08a436f34b1498c71f90afcb70b77d1b1d01"
+    },
+    {
+      "path": "evaluator/self-test.mjs",
+      "role": "reference and negative-control self-test",
+      "sha256": "ecaf0f05295ecdbca8d38c77d0bc0f11e5e7f8ae65b8852ab0eac72d8225f217"
+    },
+    {
+      "path": "evaluator/templates/IMPLEMENTATION_REPORT.md",
+      "role": "implementation evidence report template",
+      "sha256": "c42ec955eb81a2476c1a9b3532be3b910cd5411e11693a199a78b440a2f3f09a"
+    },
+    {
+      "path": "evaluator/vectors/client-preservation.json",
+      "role": "client preservation vectors",
+      "sha256": "9f1bc772910856b7369cc8f9604d3d966b9d67527e100e64f45512cc4e17ef2e"
+    },
+    {
+      "path": "evaluator/vectors/semantic.json",
+      "role": "provider-neutral positive and negative semantic vectors",
+      "sha256": "64dc638f447e4668a8a429fef002786323929eca4226dedb81f400b1e88be920"
+    },
+    {
+      "path": "evaluator/verify-manifest.mjs",
+      "role": "pack integrity verifier",
+      "sha256": "6b7d5a6f34eebbdee941428cbfe412837231de31b9237f633d8bf34ca41c0594"
+    },
+    {
+      "path": "package-lock.json",
+      "role": "exact dependency resolution used by the evaluator",
+      "sha256": "c0ef0e2fdbbea32b5579859217687b4c772c55fb8f52ddf35616e024fd862ba3"
+    },
+    {
+      "path": "package.json",
+      "role": "runtime requirement, evaluator script, and dependency declarations",
+      "sha256": "e4985bc7e39bef7d6779f29b4b560b08880a0c179056e7e03ee54a4a86b976eb"
+    },
+    {
+      "path": "schemas/openinquiry-profile-0.1.schema.json",
+      "role": "canonical OpenInquiry 0.1 JSON Schema",
+      "sha256": "21ef890e7166551e96285e7193463b0a0fbdb39b624709923805708658ce3287"
+    },
+    {
+      "path": "src/lib/profile/validation.ts",
+      "role": "canonical semantic validator",
+      "sha256": "2606988caca1359c23d7ee59c9d8008c8200f6f94a268e991f7b3f873e06a2fd"
+    },
+    {
+      "path": "src/lib/profile/receipts.ts",
+      "role": "semantic validator receipt allowlist dependency",
+      "sha256": "4c199312fc28f5e5a842d0ba566b2ff42660b2838d289aa0a432a529739bb184"
+    },
+    {
+      "path": "src/lib/profile/types.ts",
+      "role": "semantic validator profile identity dependency",
+      "sha256": "a407e432fccd994a847230212bb4012e831644ce83ba51a186ed749f9c130529"
+    },
+    {
+      "path": "tests/verification/profile-schema-validator.mjs",
+      "role": "canonical schema execution bridge",
+      "sha256": "01a5df325ee26c164a65f3dea5fb64f2bc093e5feaeacbbe02e2d3fc524fe873"
+    }
+  ],
+  "manifestDigest": "b3c5b968856bd0abe9759deda6e5c163c51790ebef48939dd5965c7040a43800"
+}

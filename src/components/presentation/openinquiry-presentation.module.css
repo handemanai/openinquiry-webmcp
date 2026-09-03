@@ -1,0 +1,2464 @@
+.presentation {
+  --paper: #f3efe5;
+  --paper-light: #fbf8f0;
+  --ink: #26312d;
+  --muted: #727a75;
+  --oxide: #b6533b;
+  --faint: rgba(38, 49, 45, 0.18);
+  --eyebrow-size: clamp(1rem, 1.2vw, 1.2rem);
+  --counter-size: clamp(0.82rem, 0.95vw, 0.95rem);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(rgba(53, 65, 61, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(53, 65, 61, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(53, 65, 61, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(53, 65, 61, 0.015) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+  color: var(--ink);
+  min-height: 100svh;
+  overflow-x: clip;
+  position: relative;
+}
+
+.presentationHeader {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  left: 0;
+  padding: 1.25rem clamp(1.25rem, 3.5vw, 4rem);
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 30;
+}
+
+.homeLink {
+  color: var(--ink);
+  font-size: clamp(0.78rem, 0.9vw, 0.9rem);
+  font-weight: 760;
+  letter-spacing: 0.09em;
+  pointer-events: auto;
+  text-transform: uppercase;
+}
+
+.homeLink span {
+  color: var(--oxide);
+  margin-right: 0.45rem;
+}
+
+.presentationHeader > p {
+  color: var(--muted);
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: var(--counter-size);
+  font-weight: 650;
+  letter-spacing: 0.11em;
+  margin: 0;
+}
+
+.presentationHeader > p span { color: var(--oxide); }
+
+.story {
+  display: grid;
+  min-height: 1000svh;
+}
+
+.stage,
+.beatTrack {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.stage {
+  height: 100svh;
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.canvasShell {
+  inset: clamp(13rem, 24vh, 15rem) clamp(0.5rem, 1.8vw, 2rem) clamp(4.5rem, 9vh, 7rem);
+  position: absolute;
+  transition: inset 620ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.relationshipDiagram {
+  display: block;
+  height: 100%;
+  margin: 0 auto;
+  max-width: 1600px;
+  overflow: visible;
+  width: 100%;
+  transition: transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 901px) and (min-height: 741px) {
+  .relationshipDiagram {
+    transform: translateY(clamp(-3.5rem, -3.5vh, -2rem));
+  }
+}
+
+.beatTrack {
+  pointer-events: none;
+  position: relative;
+  z-index: 1;
+}
+
+.beat {
+  min-height: 100svh;
+  position: relative;
+}
+
+.narrativeViewport {
+  min-height: clamp(18rem, 30vh, 20.5rem);
+  inset: 0 0 auto;
+  overflow: hidden;
+  position: absolute;
+  transition: opacity 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 4;
+}
+
+.narrativeBand {
+  align-content: start;
+  background: linear-gradient(
+    180deg,
+    rgba(243, 239, 229, 0.995) 0%,
+    rgba(243, 239, 229, 0.985) 78%,
+    rgba(243, 239, 229, 0) 100%
+  );
+  display: grid;
+  box-sizing: border-box;
+  gap: clamp(0.7rem, 1vw, 0.95rem);
+  grid-template-columns: 3px minmax(0, 1fr);
+  inset: 0;
+  min-height: inherit;
+  opacity: 0;
+  padding: 5.1rem clamp(1.5rem, 5vw, 5.5rem) 2rem;
+  pointer-events: auto;
+  position: absolute;
+  transition: opacity 280ms ease;
+}
+
+.narrativeBand::before {
+  align-self: stretch;
+  background: var(--oxide);
+  content: "";
+  grid-column: 1;
+  grid-row: 1;
+  min-height: 6.75rem;
+  width: 3px;
+}
+
+.narrativeBand[data-narrative-state="active"] {
+  opacity: 1;
+  position: relative;
+  inset: auto;
+}
+
+.narrativeBand[data-narrative-state="past"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.narrativeBand[data-narrative-state="future"] {
+  pointer-events: none;
+}
+
+.narrativeCopy > p {
+  color: var(--oxide);
+  font-size: var(--eyebrow-size);
+  font-weight: 760;
+  letter-spacing: 0.15em;
+  margin: 0 0 0.9rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.narrativeCopy {
+  grid-column: 2;
+  min-width: 0;
+}
+
+.narrativeCopy h1,
+.narrativeCopy h2 {
+  font-family: var(--serif);
+  font-size: clamp(3.75rem, 5.6vw, 5.5rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  margin: 0;
+  max-width: min(86rem, 88vw);
+  text-wrap: balance;
+}
+
+.narrativeViewport:is([data-narrative-id="before-agents"], [data-narrative-id="agent-era"]) {
+  min-height: clamp(22.5rem, 35vh, 24.5rem);
+}
+
+.narrativeViewport[data-narrative-id="licensed-content"] {
+  min-height: clamp(22rem, 36vh, 23rem);
+}
+
+.narrativeViewport:is([data-narrative-id="policy-inputs"], [data-narrative-id="source-decision-focus"]) {
+  min-height: clamp(22.5rem, 35vh, 24.5rem);
+}
+
+.narrativeViewport:is(
+  [data-narrative-id="permission-set"],
+  [data-narrative-id="public-baseline"],
+  [data-narrative-id="public-zdr"],
+  [data-narrative-id="signed-in-bounded"],
+  [data-narrative-id="signed-in-zdr"]
+) {
+  min-height: clamp(22.5rem, 35vh, 24.5rem);
+}
+
+.narrativeViewport:is(
+  [data-narrative-id="opening-provocation"],
+  [data-narrative-id="three-parties"],
+  [data-narrative-id="webmcp-and-openinquiry"],
+  [data-narrative-id="standards-provocation"],
+  [data-narrative-id="authorized-return"]
+) {
+  min-height: clamp(21.5rem, 35vh, 23rem);
+}
+
+.narrativeViewport[data-narrative-id="authorized-return"] {
+  min-height: clamp(27.5rem, 40vh, 29rem);
+}
+
+.narrativeViewport[data-narrative-id="webmcp-and-openinquiry"] {
+  min-height: clamp(26rem, 39vh, 27rem);
+}
+
+.narrativeViewport[data-narrative-id="webmcp-and-openinquiry"] .narrativeBand {
+  padding-right: clamp(1.5rem, 3vw, 3rem);
+}
+
+.narrativeViewport[data-narrative-id="webmcp-and-openinquiry"] .narrativeCopy h2[data-title-lines="2"] {
+  font-size: min(5.2rem, 3.55vw);
+  max-width: none;
+  white-space: nowrap;
+  text-wrap: nowrap;
+}
+
+.narrativeCopy span {
+  color: var(--muted);
+  display: block;
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 1.7vw, 1.65rem);
+  line-height: 1.32;
+  margin-top: 1.35rem;
+  max-width: 64rem;
+}
+
+.narrativeViewport:is([data-narrative-id="agent-era"], [data-narrative-id="licensed-content"]) .narrativeCopy span {
+  max-width: min(76rem, 82vw);
+}
+
+.demoAction {
+  align-items: center;
+  background: var(--oxide);
+  box-sizing: border-box;
+  color: var(--paper-light);
+  display: inline-flex;
+  font-size: clamp(0.88rem, 1vw, 1rem);
+  font-weight: 760;
+  justify-content: center;
+  letter-spacing: 0.075em;
+  line-height: 1;
+  margin-top: 1.35rem;
+  min-height: 2.75rem;
+  padding: 0.9rem 1.2rem;
+  text-transform: uppercase;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.demoAction:hover {
+  background: var(--ink);
+  transform: translateY(-2px);
+}
+
+.demoAction:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.scrollCue {
+  align-items: center;
+  bottom: 1.35rem;
+  color: var(--muted);
+  display: flex;
+  font-size: var(--eyebrow-size);
+  font-weight: 740;
+  gap: 0.62rem;
+  left: clamp(1.5rem, 5vw, 5.5rem);
+  letter-spacing: 0.1em;
+  margin: 0;
+  position: absolute;
+  text-transform: uppercase;
+  transition: opacity 180ms ease;
+  z-index: 3;
+}
+
+.scrollCue span {
+  color: var(--oxide);
+  font-size: 1.15em;
+}
+
+.beatNavigation {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: clamp(0.2rem, 1.1vw, 1.1rem);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 6;
+}
+
+.beatNavigation button {
+  align-items: center;
+  appearance: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  height: 44px;
+  justify-content: center;
+  padding: 0;
+  width: 44px;
+}
+
+.beatNavigation button > span {
+  background: rgba(38, 49, 45, 0.28);
+  border-radius: 999px;
+  height: 5px;
+  transition:
+    background-color 220ms ease,
+    height 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  width: 5px;
+}
+
+.beatNavigation button[aria-current="step"] > span {
+  background: var(--oxide);
+  height: 18px;
+}
+
+.beatNavigation button:focus-visible {
+  outline: none;
+}
+
+.beatNavigation button:focus-visible > span {
+  outline: 1px solid var(--oxide);
+  outline-offset: 5px;
+}
+
+.presentation:not([data-story-index="1"]) .scrollCue {
+  opacity: 0;
+}
+
+.nodeOuter,
+.resourceFrame,
+.resourceCardOuter {
+  fill: rgba(243, 239, 229, 0.97);
+  stroke: var(--ink);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.nodeInner,
+.resourceFrameInner,
+.resourceCardInner {
+  fill: none;
+  stroke: rgba(38, 49, 45, 0.23);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.resourceFrame,
+.resourceFrameInner {
+  transition:
+    fill 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    stroke 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.node[data-tone="dark"] .nodeOuter { fill: var(--ink); }
+.node[data-tone="dark"] .nodeInner { stroke: rgba(243, 239, 229, 0.28); }
+
+.node[data-tone="person"] .nodeOuter {
+  fill: rgba(182, 83, 59, 0.07);
+  stroke: var(--oxide);
+}
+
+.node[data-tone="person"] .nodeInner {
+  stroke: rgba(182, 83, 59, 0.34);
+}
+
+.nodeTitle {
+  fill: #1f2925;
+  font-family: var(--sans);
+  font-size: 42px;
+  font-weight: 640;
+  letter-spacing: -0.035em;
+}
+
+.node[data-tone="dark"] .nodeTitle { fill: var(--paper-light); }
+
+.nodeKicker {
+  fill: rgba(243, 239, 229, 0.68);
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 15px;
+  font-weight: 680;
+  letter-spacing: 0.16em;
+}
+
+.nodeSubtitle {
+  fill: rgba(243, 239, 229, 0.68);
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 15px;
+  font-weight: 680;
+  letter-spacing: 0.16em;
+}
+
+.resourcesTitle {
+  fill: var(--ink);
+  font-family: var(--sans);
+  font-size: 58px;
+  font-weight: 620;
+  letter-spacing: -0.045em;
+  transform: translateY(0);
+  transition:
+    fill 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    font-size 560ms cubic-bezier(0.16, 1, 0.3, 1),
+    letter-spacing 560ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 560ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.requestPath,
+.responsePath,
+.parkedConnectionPath,
+.parkedConnectionResponsePath,
+.resourceRequestPath,
+.resourceResponsePath {
+  fill: none;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  vector-effect: non-scaling-stroke;
+}
+
+.requestPath {
+  stroke: var(--ink);
+  stroke-width: 2.7;
+}
+
+.responsePath {
+  stroke: var(--oxide);
+  stroke-width: 2.7;
+}
+
+.parkedConnectionPath,
+.parkedConnectionResponsePath {
+  opacity: 0.48;
+  stroke-width: 2.2;
+}
+
+.parkedConnectionPath { stroke: var(--ink); }
+.parkedConnectionResponsePath { stroke: var(--oxide); }
+
+.licensedChannelPath {
+  opacity: 1;
+}
+
+.licensedCanonicalPath {
+  opacity: 1;
+}
+
+.resourceRequestPath {
+  stroke: var(--ink);
+  stroke-width: 2.35;
+}
+
+.resourceResponsePath {
+  stroke: var(--oxide);
+  stroke-width: 2.35;
+}
+
+.flowPath {
+  --flow-marker: none;
+  marker-end: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.flowArrowInk { --flow-marker: url("#presentation-arrow-ink"); }
+.flowArrowOxide { --flow-marker: url("#presentation-arrow-oxide"); }
+
+.presentation[data-active-beat="1"] .visionOnly .flowPath,
+.presentation[data-active-beat="3"] .beforeOnly .flowPath,
+.presentation[data-active-beat="4"] .agentEraOnly .flowPath,
+.presentation[data-active-beat="5"] .licensedOnly .flowPath,
+.presentation[data-active-beat="6"] .visionOnly .flowPath,
+.presentation[data-active-beat="7"] .sourceControlOnly .flowPath {
+  animation: drawFlowPath var(--flow-duration, 680ms) cubic-bezier(0.16, 1, 0.3, 1)
+    var(--flow-delay, 80ms) both;
+}
+
+.presentation[data-active-beat="8"] .sourceControlOnly .flowPath {
+  marker-end: var(--flow-marker);
+  stroke-dashoffset: 0;
+}
+
+.resourceResponseLabel {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.presentation[data-active-beat="3"] .resourceResponseLabel {
+  animation: revealRailLabel 280ms cubic-bezier(0.16, 1, 0.3, 1) 1140ms both;
+}
+
+.markerInk,
+.markerOxide {
+  fill: none;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 1.7;
+}
+
+.markerInk { stroke: var(--ink); }
+.markerOxide { stroke: var(--oxide); }
+
+.labelPlate,
+.railLabelPlate {
+  fill: var(--paper);
+  opacity: 0.985;
+}
+
+.codeLabel,
+.plainLabel,
+.railLabel {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+.codeLabel {
+  fill: var(--ink);
+  font-size: 16px;
+  font-weight: 570;
+}
+
+.plainLabel {
+  fill: var(--muted);
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 520;
+}
+
+.arrowLabel[data-tone="response"] .codeLabel { fill: var(--oxide); }
+.arrowLabel[data-tone="response"] .plainLabel { fill: #8e594a; }
+
+.resourceCardOuter { stroke-width: 1.75; }
+
+.resourceTitle {
+  fill: var(--ink);
+  font-family: var(--sans);
+  font-size: 20px;
+  font-weight: 640;
+  letter-spacing: -0.02em;
+}
+
+.railLabel {
+  fill: var(--ink);
+  font-size: 16px;
+  font-weight: 570;
+}
+
+.railLabelResponse { fill: var(--oxide); }
+
+.accessPortOuter {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 2;
+  transition:
+    fill 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    stroke 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  vector-effect: non-scaling-stroke;
+}
+
+.directAccessPortMask {
+  fill: var(--paper);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.accessPortInner {
+  fill: none;
+  stroke: rgba(38, 49, 45, 0.23);
+  stroke-width: 1;
+  transition: stroke 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  vector-effect: non-scaling-stroke;
+}
+
+.accessPortEyebrow {
+  fill: var(--oxide);
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 14px;
+  font-weight: 680;
+  letter-spacing: 0.13em;
+}
+
+.agentAccessDefaultEyebrow,
+.agentAccessPolicyEyebrow {
+  transition:
+    opacity 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.agentAccessPolicyEyebrow {
+  opacity: 0;
+  transform: translateY(3px);
+}
+
+.accessPortStateText {
+  fill: var(--ink);
+  font-family: var(--sans);
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.accessPortState {
+  opacity: 0;
+  transform: translateY(3px);
+  transition:
+    opacity 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sourceAuthorityState,
+.trustedHandlingState {
+  opacity: 0;
+  transform: translateY(3px);
+  transition:
+    opacity 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sourceContextPath {
+  opacity: 0.42;
+}
+
+.resourceCard,
+.humanLayer,
+.beforeOnly,
+.agentEraOnly,
+.licensedOnly,
+.visionOnly,
+.sourceControlOnly,
+.agentLayer,
+.personalAgentLayer,
+.licensedAgentLayer,
+.accessPortLayer {
+  transition:
+    opacity 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 560ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.resourceCard,
+.beforeOnly,
+.agentEraOnly,
+.licensedOnly,
+.visionOnly,
+.sourceControlOnly,
+.agentLayer,
+.personalAgentLayer,
+.licensedAgentLayer,
+.accessPortLayer {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.personalAgentLayer,
+.licensedAgentLayer {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.licensedAgentLayer {
+  transform: translateX(80px);
+}
+
+.resourceCard {
+  transition-delay: calc(140ms + var(--card-index) * 45ms);
+}
+
+.presentation[data-active-beat="3"] .resourceFrame {
+  fill: rgba(243, 239, 229, 0.48);
+  stroke: #9b9f9b;
+}
+
+.presentation[data-active-beat="3"] .resourceFrameInner { stroke: rgba(120, 126, 121, 0.26); }
+
+.presentation[data-active-beat="3"] .agentLayer {
+  opacity: 0.18;
+}
+
+.presentation[data-active-beat="3"] .resourcesTitle,
+.presentation[data-active-beat="4"] .resourcesTitle,
+.presentation[data-active-beat="5"] .resourcesTitle,
+.presentation[data-active-beat="6"] .resourcesTitle,
+.presentation[data-active-beat="7"] .resourcesTitle,
+.presentation[data-active-beat="8"] .resourcesTitle,
+.presentation[data-active-beat="17"] .resourcesTitle {
+  fill: #777e79;
+  font-size: 32px;
+  letter-spacing: -0.025em;
+  transform: translateY(-109px);
+}
+
+.presentation[data-active-beat="3"] .resourceCard,
+.presentation[data-active-beat="4"] .resourceCard,
+.presentation[data-active-beat="5"] .resourceCard,
+.presentation[data-active-beat="6"] .resourceCard,
+.presentation[data-active-beat="7"] .resourceCard,
+.presentation[data-active-beat="8"] .resourceCard,
+.presentation[data-active-beat="3"] .beforeOnly,
+.presentation[data-active-beat="4"] .agentEraOnly,
+.presentation[data-active-beat="5"] .licensedOnly,
+.presentation[data-active-beat="1"] .visionOnly,
+.presentation[data-active-beat="6"] .visionOnly,
+.presentation[data-active-beat="7"] .sourceControlOnly,
+.presentation[data-active-beat="8"] .sourceControlOnly,
+.presentation[data-active-beat="1"] .agentLayer,
+.presentation[data-active-beat="2"] .agentLayer,
+.presentation[data-active-beat="4"] .personalAgentLayer,
+.presentation[data-active-beat="5"] .personalAgentLayer,
+.presentation[data-active-beat="5"] .licensedAgentLayer,
+.presentation[data-active-beat="6"] .personalAgentLayer,
+.presentation[data-active-beat="7"] .personalAgentLayer,
+.presentation[data-active-beat="8"] .personalAgentLayer,
+.presentation[data-active-beat="1"] .directAccessPortLayer,
+.presentation[data-active-beat="3"] .directAccessPortLayer,
+.presentation[data-active-beat="5"] .directAccessPortLayer,
+.presentation[data-active-beat="6"] .directAccessPortLayer,
+.presentation[data-active-beat="7"] .directAccessPortLayer,
+.presentation[data-active-beat="8"] .directAccessPortLayer,
+.presentation[data-active-beat="1"] .agentAccessPortLayer,
+.presentation[data-active-beat="4"] .agentAccessPortLayer,
+.presentation[data-active-beat="5"] .agentAccessPortLayer,
+.presentation[data-active-beat="6"] .agentAccessPortLayer,
+.presentation[data-active-beat="7"] .agentAccessPortLayer,
+.presentation[data-active-beat="8"] .agentAccessPortLayer {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.presentation[data-active-beat="3"] .beforeOnly,
+.presentation[data-active-beat="4"] .agentEraOnly,
+.presentation[data-active-beat="5"] .licensedOnly,
+.presentation[data-active-beat="6"] .visionOnly,
+.presentation[data-active-beat="6"] .personalAgentLayer,
+.presentation[data-active-beat="7"] .sourceControlOnly,
+.presentation[data-active-beat="8"] .sourceControlOnly,
+.presentation[data-active-beat="7"] .personalAgentLayer,
+.presentation[data-active-beat="8"] .personalAgentLayer {
+  transition-delay: 80ms;
+}
+
+.presentation[data-active-beat="1"] .directAccessStateOpening,
+.presentation[data-active-beat="3"] .directAccessStatePhysician,
+.presentation[data-active-beat="5"] .directAccessStatePhysician,
+.presentation[data-active-beat="6"] .directAccessStatePhysician,
+.presentation[data-active-beat="7"] .directAccessStatePhysician,
+.presentation[data-active-beat="8"] .directAccessStatePhysician,
+.presentation[data-active-beat="1"] .agentAccessStateOpening,
+.presentation[data-active-beat="4"] .agentAccessStateDenied,
+.presentation[data-active-beat="5"] .agentAccessStatePartnership,
+.presentation[data-active-beat="6"] .agentAccessStatePhysician,
+.presentation[data-active-beat="7"] .agentAccessStateSourceBounded,
+.presentation[data-active-beat="8"] .agentAccessStateSourceFull {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.presentation[data-active-beat="4"] .agentAccessStateDenied {
+  transition-delay: 680ms;
+}
+
+.presentation[data-active-beat="3"] .directAccessStatePhysician {
+  transition-delay: 260ms;
+}
+
+.presentation[data-active-beat="5"] .agentAccessStatePartnership {
+  transition-delay: 560ms;
+}
+
+.presentation[data-active-beat="5"] .directAccessStatePhysician {
+  transition-delay: 260ms;
+}
+
+.presentation[data-active-beat="6"] .directAccessStatePhysician,
+.presentation[data-active-beat="6"] .agentAccessStatePhysician,
+.presentation[data-active-beat="7"] .directAccessStatePhysician,
+.presentation[data-active-beat="8"] .directAccessStatePhysician,
+.presentation[data-active-beat="7"] .agentAccessStateSourceBounded,
+.presentation[data-active-beat="8"] .agentAccessStateSourceFull {
+  transition-delay: 480ms;
+}
+
+.presentation[data-active-beat="7"] .sourceAuthorityState,
+.presentation[data-active-beat="8"] .trustedHandlingState {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 180ms;
+}
+
+.presentation[data-active-beat="7"] .agentAccessPolicyEyebrow,
+.presentation[data-active-beat="8"] .agentAccessPolicyEyebrow {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.presentation[data-active-beat="7"] .agentAccessDefaultEyebrow,
+.presentation[data-active-beat="8"] .agentAccessDefaultEyebrow {
+  opacity: 0;
+  transform: translateY(-3px);
+}
+
+.presentation[data-active-beat="7"] .directAccessPortLayer,
+.presentation[data-active-beat="8"] .directAccessPortLayer {
+  opacity: 0.42;
+}
+
+.presentation:is([data-active-beat="7"], [data-active-beat="8"], [data-active-beat="17"]) .directAccessPortMask {
+  opacity: 1;
+}
+
+.presentation[data-active-beat="7"] .agentAccessPortLayer .accessPortOuter,
+.presentation[data-active-beat="8"] .agentAccessPortLayer .accessPortOuter {
+  fill: rgba(182, 83, 59, 0.07);
+  stroke: var(--oxide);
+}
+
+.presentation[data-active-beat="7"] .agentAccessPortLayer .accessPortInner,
+.presentation[data-active-beat="8"] .agentAccessPortLayer .accessPortInner {
+  stroke: rgba(182, 83, 59, 0.34);
+}
+
+.agentAccessStateDenied .accessPortStateText {
+  fill: var(--oxide);
+}
+
+.presentation[data-active-beat="5"] .personalAgentLayer {
+  opacity: 0.46;
+  transform: translate(-850px, 220px) scale(0.68);
+}
+
+.presentation[data-active-beat="5"] .licensedAgentLayer {
+  transform: translateX(0);
+}
+
+.presentation[data-active-beat="4"] .resourceFrame {
+  fill: rgba(243, 239, 229, 0.38);
+  stroke: rgba(38, 49, 45, 0.46);
+}
+
+.presentation[data-active-beat="4"] .resourceFrameInner {
+  stroke: rgba(38, 49, 45, 0.18);
+}
+
+.presentation[data-active-beat="4"] .resourcesTitle,
+.presentation[data-active-beat="4"] .resourceCard {
+  opacity: 0.48;
+}
+
+.presentation[data-active-beat="5"] .resourceFrame {
+  fill: rgba(243, 239, 229, 0.58);
+  stroke: rgba(38, 49, 45, 0.64);
+}
+
+.presentation[data-active-beat="5"] .resourceFrameInner {
+  stroke: rgba(38, 49, 45, 0.2);
+}
+
+.presentation[data-active-beat="5"] .resourcesTitle,
+.presentation[data-active-beat="5"] .resourceCard {
+  opacity: 0.68;
+}
+
+.resourceFrameLayer {
+  transition:
+    opacity 360ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.policyFocusLayer {
+  opacity: 0;
+  pointer-events: none;
+  transform: matrix(0.264957, 0, 0, 0.146875, 943.034, 286.125);
+  transform-box: view-box;
+  transform-origin: 0 0;
+  transition:
+    opacity 180ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 820ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.policyFocusOuter {
+  fill: rgba(243, 239, 229, 0.995);
+  stroke: var(--oxide);
+  stroke-width: 2.2;
+  transition:
+    fill 280ms cubic-bezier(0.4, 0, 0.2, 1) 90ms,
+    stroke 360ms cubic-bezier(0.4, 0, 0.2, 1),
+    height 560ms cubic-bezier(0.4, 0, 0.2, 1);
+  vector-effect: non-scaling-stroke;
+}
+
+.policyFocusInner {
+  fill: rgba(251, 248, 240, 0.99);
+  stroke: rgba(182, 83, 59, 0.28);
+  stroke-width: 1;
+  transition:
+    opacity 240ms cubic-bezier(0.4, 0, 0.2, 1) 90ms,
+    height 560ms cubic-bezier(0.4, 0, 0.2, 1);
+  vector-effect: non-scaling-stroke;
+}
+
+.policyFocusContent {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 480ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.policyFocusEyebrow,
+.policyGateEyebrow,
+.policyGateUserValue,
+.policyGateMeta,
+.policyGateAgentEyebrow,
+.policyGateAgentValue,
+.policyGateAgentMeta,
+.policyGateStateText,
+.policyGateProposedTagText,
+.policyGateCoreCode,
+.policyGateCoreTitle,
+.policyMatrixFunction,
+.policyMatrixRequest,
+.policyMatrixCornerEyebrow,
+.policyMatrixCornerTitle,
+.policyMatrixColumnEyebrow,
+.policyMatrixColumnTitle,
+.policyMatrixRowEyebrow,
+.policyMatrixRowTitle,
+.policyMatrixRowMeta,
+.policyMatrixCellCode,
+.policyMatrixCellTitle,
+.policyMatrixCellBody,
+.policyMatrixResultEyebrow,
+.policyMatrixResultTitle {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+.policyFocusEyebrow {
+  fill: var(--oxide);
+  font-size: 16px;
+  font-weight: 720;
+  letter-spacing: 0.16em;
+}
+
+.policyFocusTitle {
+  fill: var(--ink);
+  font-family: var(--serif);
+  font-size: 42px;
+  font-weight: 400;
+  letter-spacing: -0.045em;
+}
+
+.policyFocusBody {
+  fill: var(--muted);
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+}
+
+.policyFocusBeatTitle {
+  opacity: 0;
+  transform: translateY(5px);
+  transition:
+    opacity 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.policyFocusDivider {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.policyFocusDivider {
+  stroke: rgba(38, 49, 45, 0.2);
+  stroke-width: 1;
+}
+
+.policyFocusIntro,
+.policyFocusDetails,
+.policyMatrixBoundedResult,
+.policyMatrixFullResult {
+  opacity: 0;
+  transform: translateY(7px);
+  transition:
+    opacity 340ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 480ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.policyGateUserInput,
+.policyGateAgentInput,
+.policyGateCore {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 340ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.policyGateSynthesis {
+  opacity: 0;
+  transition: opacity 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.policyGateUserFill,
+.policyGateAgentFill,
+.policyGateUserStateFill,
+.policyGateAgentStateFill,
+.policyGateCoreOuter,
+.policyGateCoreInner,
+.policyMatrixCorner,
+.policyMatrixColumnHeader,
+.policyMatrixRowHeader,
+.policyMatrixCell,
+.policyMatrixActiveCell,
+.policyMatrixResultFill {
+  vector-effect: non-scaling-stroke;
+}
+
+.policyGateUserFill {
+  fill: rgba(182, 83, 59, 0.075);
+  stroke: var(--oxide);
+  stroke-width: 1.6;
+}
+
+.policyGateEyebrow,
+.policyGateAgentEyebrow {
+  font-size: 16px;
+  font-weight: 720;
+  letter-spacing: 0.12em;
+}
+
+.policyGateEyebrow { fill: var(--oxide); }
+
+.policyGateUserValue,
+.policyGateAgentValue {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.policyGateUserValue { fill: var(--ink); }
+
+.policyGateUserStateFill {
+  fill: rgba(251, 248, 240, 0.72);
+  stroke: rgba(182, 83, 59, 0.34);
+  stroke-width: 1;
+}
+
+.policyGateStateText {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.policyGateUserStateText { fill: var(--ink); }
+
+.policyGateMeta,
+.policyGateAgentMeta {
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+}
+
+.policyGateMeta { fill: var(--muted); }
+
+.policyGateAgentFill {
+  fill: var(--ink);
+  stroke: var(--ink);
+  stroke-width: 1.6;
+}
+
+.policyGateAgentEyebrow { fill: rgba(243, 239, 229, 0.62); }
+.policyGateAgentValue { fill: var(--paper-light); }
+.policyGateAgentMeta { fill: rgba(243, 239, 229, 0.68); }
+
+.policyGateAgentStateFill {
+  fill: rgba(243, 239, 229, 0.065);
+  stroke: rgba(243, 239, 229, 0.22);
+  stroke-width: 1;
+}
+
+.policyGateAgentStateText { fill: var(--paper-light); }
+
+.policyGateProposedTagFill {
+  fill: var(--oxide);
+  stroke: var(--oxide);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.policyGateProposedTagText {
+  fill: var(--paper-light);
+  font-size: 14px;
+  font-weight: 720;
+  letter-spacing: 0.08em;
+}
+
+.policyGatePath {
+  fill: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  stroke-linecap: round;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.policyGateUserPath { stroke: var(--oxide); }
+.policyGateAgentPath { stroke: var(--ink); }
+
+.policyGateCoreOuter {
+  fill: var(--paper-light);
+  stroke: var(--oxide);
+  stroke-width: 2;
+}
+
+.policyGateCoreInner {
+  fill: none;
+  stroke: rgba(182, 83, 59, 0.3);
+  stroke-width: 1;
+}
+
+.policyGateCoreCode {
+  fill: var(--oxide);
+  font-size: 16px;
+  font-weight: 720;
+}
+
+.policyGateCoreTitle {
+  fill: var(--ink);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.policyMatrixFunction,
+.policyMatrixRequest {
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.policyMatrixFunction { fill: var(--oxide); }
+.policyMatrixRequest { fill: var(--muted); }
+
+.policyMatrixCorner {
+  fill: rgba(182, 83, 59, 0.075);
+  stroke: rgba(182, 83, 59, 0.55);
+  stroke-width: 1.3;
+}
+
+.policyMatrixColumnHeader {
+  fill: var(--ink);
+  stroke: var(--ink);
+  stroke-width: 1.3;
+}
+
+.policyMatrixCornerEyebrow,
+.policyMatrixColumnEyebrow,
+.policyMatrixRowEyebrow,
+.policyMatrixCellCode,
+.policyMatrixResultEyebrow {
+  font-size: 10px;
+  font-weight: 720;
+  letter-spacing: 0.12em;
+}
+
+.policyMatrixCornerEyebrow,
+.policyMatrixRowEyebrow { fill: var(--oxide); }
+
+.policyMatrixCornerTitle,
+.policyMatrixColumnTitle,
+.policyMatrixRowTitle,
+.policyMatrixCellTitle {
+  font-size: 14px;
+  font-weight: 720;
+}
+
+.policyMatrixCornerTitle,
+.policyMatrixRowTitle,
+.policyMatrixCellTitle { fill: var(--ink); }
+
+.policyMatrixColumnEyebrow { fill: rgba(243, 239, 229, 0.6); }
+.policyMatrixColumnTitle { fill: var(--paper-light); }
+
+.policyMatrixRowHeader {
+  fill: rgba(243, 239, 229, 0.78);
+  stroke: rgba(38, 49, 45, 0.32);
+  stroke-width: 1.2;
+}
+
+.policyMatrixRowMeta,
+.policyMatrixCellBody {
+  fill: var(--muted);
+  font-size: 11px;
+  font-weight: 570;
+}
+
+.policyMatrixCell {
+  fill: rgba(251, 248, 240, 0.72);
+  stroke: rgba(38, 49, 45, 0.28);
+  stroke-width: 1.2;
+}
+
+.policyMatrixActiveCell {
+  fill: rgba(182, 83, 59, 0.095);
+  stroke: var(--oxide);
+  stroke-width: 2;
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.policyMatrixActiveColumnRule,
+.policyMatrixActiveRowRule {
+  fill: var(--oxide);
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.policyMatrixCellCopy { pointer-events: none; }
+
+.policyMatrixCellCode { fill: var(--oxide); }
+.policyMatrixCellTitle { font-size: 16px; }
+.policyMatrixCellBody { font-size: 12px; }
+
+.policyMatrixResultFill {
+  fill: var(--ink);
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+
+.policyMatrixResultEyebrow {
+  fill: rgba(243, 239, 229, 0.58);
+}
+
+.policyMatrixResultTitle {
+  fill: var(--paper-light);
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+}
+
+.policyPermissionEyebrow,
+.policyPermissionFunction,
+.policyPermissionCode,
+.policyPermissionDescription,
+.policyEvaluationCoreCode,
+.policyEvaluationCoreLabel,
+.policyEvaluationResultCode,
+.policyEvaluationResultDescription,
+.policyProgressMapEyebrow,
+.policyProgressColumnLabel,
+.policyProgressRowLabel,
+.policyProgressCellText {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+.policyPermissionSet,
+.policyEvaluation {
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 340ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 560ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.policyPermissionSet {
+  transform: translateY(12px);
+}
+
+.policyPermissionOuter,
+.policyPermissionInner,
+.policyPermissionRowFill,
+.policyEvaluationCoreOuter,
+.policyEvaluationCoreInner,
+.policyProgressMapOuter,
+.policyProgressMapInner,
+.policyProgressRowFill,
+.policyProgressCellFill,
+.policyGateUserNotSignedState,
+.policyGateUserSignedState,
+.policyGateAgentUnverifiedState,
+.policyGateAgentZdrState {
+  vector-effect: non-scaling-stroke;
+}
+
+.policyPermissionOuter {
+  fill: rgba(243, 239, 229, 0.98);
+  stroke: rgba(38, 49, 45, 0.58);
+  stroke-width: 1.6;
+}
+
+.policyPermissionInner {
+  fill: rgba(251, 248, 240, 0.82);
+  stroke: rgba(38, 49, 45, 0.18);
+  stroke-width: 1;
+}
+
+.policyPermissionEyebrow,
+.policyPermissionFunction {
+  fill: var(--oxide);
+  font-size: 16px;
+  font-weight: 720;
+  letter-spacing: 0.1em;
+}
+
+.policyPermissionFunction {
+  font-size: 15px;
+  letter-spacing: -0.015em;
+}
+
+.policyPermissionRowFill {
+  fill: rgba(251, 248, 240, 0.84);
+  stroke: rgba(38, 49, 45, 0.22);
+  stroke-width: 1;
+}
+
+.policyPermissionCode {
+  fill: var(--oxide);
+  font-size: 16px;
+  font-weight: 720;
+}
+
+.policyPermissionDescription {
+  fill: var(--ink);
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.policyEvaluation { transform: translateY(7px); }
+
+.policyEvaluationPath {
+  fill: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  stroke-linecap: round;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.policyEvaluationUserPath { stroke: var(--oxide); }
+.policyEvaluationAgentPath { stroke: var(--ink); }
+
+.policyEvaluationCoreOuter {
+  fill: var(--paper-light);
+  stroke: var(--oxide);
+  stroke-width: 2;
+}
+
+.policyEvaluationCoreInner {
+  fill: none;
+  stroke: rgba(182, 83, 59, 0.3);
+  stroke-width: 1;
+}
+
+.policyEvaluationCoreCode,
+.policyEvaluationCoreLabel {
+  font-size: 15px;
+  font-weight: 720;
+}
+
+.policyEvaluationCoreCode { fill: var(--oxide); }
+
+.policyEvaluationCoreLabel {
+  fill: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.policyEvaluationResult {
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.policyEvaluationResultCode {
+  fill: var(--oxide);
+  font-size: 18px;
+  font-weight: 720;
+}
+
+.policyEvaluationResultDescription {
+  fill: var(--ink);
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.policyProgressMap {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition:
+    opacity 360ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 560ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.policyProgressMapOuter {
+  fill: rgba(243, 239, 229, 0.98);
+  stroke: rgba(38, 49, 45, 0.58);
+  stroke-width: 1.6;
+}
+
+.policyProgressMapInner {
+  fill: rgba(251, 248, 240, 0.82);
+  stroke: rgba(38, 49, 45, 0.18);
+  stroke-width: 1;
+}
+
+.policyProgressMapEyebrow,
+.policyProgressColumnLabel,
+.policyProgressRowLabel,
+.policyProgressCellText {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+}
+
+.policyProgressMapEyebrow { fill: var(--oxide); }
+.policyProgressColumnLabel { fill: var(--muted); }
+
+.policyProgressRowFill {
+  fill: rgba(243, 239, 229, 0.72);
+  stroke: rgba(38, 49, 45, 0.24);
+  stroke-width: 1;
+}
+
+.policyProgressRowLabel { fill: var(--ink); }
+
+.policyProgressCell {
+  opacity: 1;
+}
+
+.policyProgressCellFill {
+  fill: rgba(251, 248, 240, 0.72);
+  stroke: rgba(38, 49, 45, 0.28);
+  stroke-width: 1;
+  transition:
+    fill 360ms cubic-bezier(0.16, 1, 0.3, 1),
+    stroke 360ms cubic-bezier(0.16, 1, 0.3, 1),
+    stroke-width 360ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.openingProvocationLayer,
+.profileLayers,
+.standardsProvocationLayer {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition:
+    opacity 360ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 560ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.openingProvocationLine {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 340ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.openingPublisherLine { transition-delay: 140ms; }
+.openingWebMcpQuestion { transition-delay: 280ms; }
+
+.openingProvocationText {
+  fill: var(--ink);
+  font-family: var(--serif);
+  font-size: 48px;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+.openingProvocationQuestionText {
+  fill: var(--oxide);
+  font-size: 56px;
+  font-weight: 650;
+}
+
+.openingProvocationRule {
+  fill: none;
+  stroke: rgba(38, 49, 45, 0.24);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.profileDefinitionRule,
+.profileDefinitionDivider {
+  fill: none;
+  stroke: rgba(38, 49, 45, 0.24);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.profileDefinition {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 340ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.profileDefinitionOpenInquiry { transition-delay: 120ms; }
+.profileDefinitionOutcome { transition-delay: 240ms; }
+
+.profileDefinitionEyebrow {
+  fill: var(--oxide);
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 16px;
+  font-weight: 720;
+  letter-spacing: 0.12em;
+}
+
+.profileDefinitionTitle {
+  fill: var(--ink);
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+.profileDefinitionDetail {
+  fill: var(--muted);
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.visionHumanPublisher,
+.visionAgentPublisher,
+.visionHumanAgent {
+  transition: opacity 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.conceptFrameOuter,
+.profileColumnOuter {
+  fill: rgba(243, 239, 229, 0.98);
+  stroke: var(--ink);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.conceptFrameInner,
+.profileColumnInner {
+  fill: rgba(251, 248, 240, 0.72);
+  stroke: rgba(38, 49, 45, 0.22);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.conceptFrameEyebrow,
+.conceptColumnEyebrow,
+.conceptStatement,
+.profileColumnEyebrow,
+.profileColumnEyebrowDark {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-weight: 720;
+  letter-spacing: 0.12em;
+}
+
+.conceptFrameEyebrow,
+.conceptColumnEyebrow,
+.profileColumnEyebrow {
+  fill: var(--oxide);
+}
+
+.conceptFrameEyebrow,
+.conceptColumnEyebrow,
+.profileColumnEyebrow,
+.profileColumnEyebrowDark {
+  font-size: 15px;
+}
+
+.conceptDivider,
+.profileColumnRule,
+.profileColumnRuleDark {
+  fill: none;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.conceptDivider,
+.profileColumnRule { stroke: rgba(38, 49, 45, 0.24); }
+
+.conceptColumnTitle,
+.profileColumnTitle,
+.profileColumnTitleDark {
+  font-family: var(--serif);
+  font-size: 38px;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+.conceptColumnTitle,
+.profileColumnTitle { fill: var(--ink); }
+
+.conceptColumnBody,
+.profileColumnBody,
+.profileColumnBodyDark {
+  font-family: var(--sans);
+  font-size: 18px;
+  font-weight: 530;
+}
+
+.conceptColumnBody,
+.profileColumnBody { fill: var(--muted); }
+
+.conceptStatementFill {
+  fill: var(--ink);
+}
+
+.conceptStatement {
+  fill: var(--paper-light);
+  font-size: 15px;
+}
+
+.profileColumnOuterDark {
+  fill: var(--ink);
+  stroke: var(--ink);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.profileColumnInnerDark {
+  fill: none;
+  stroke: rgba(243, 239, 229, 0.24);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.profileColumnEyebrowDark { fill: rgba(243, 239, 229, 0.62); }
+.profileColumnTitleDark { fill: var(--paper-light); }
+.profileColumnRuleDark { stroke: rgba(243, 239, 229, 0.24); }
+.profileColumnBodyDark { fill: rgba(243, 239, 229, 0.76); }
+
+.standardsProvocationSection {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(100ms + var(--section-index) * 110ms);
+}
+
+.standardsSectionRule {
+  fill: none;
+  stroke: rgba(38, 49, 45, 0.22);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.standardsStepNumber {
+  font-family: var(--sans);
+  font-size: 26px;
+  font-weight: 620;
+  fill: var(--oxide);
+  letter-spacing: -0.01em;
+}
+
+.standardsSectionHeading {
+  fill: var(--ink);
+  font-family: var(--sans);
+  font-size: 32px;
+  font-weight: 620;
+  letter-spacing: -0.02em;
+}
+
+.standardsLine {
+  fill: var(--muted);
+  font-family: var(--sans);
+  font-size: 28px;
+  font-weight: 460;
+  letter-spacing: -0.01em;
+}
+
+.presentation:is([data-active-beat="15"], [data-active-beat="16"], [data-active-beat="17"], [data-active-beat="18"]) :is(
+  .resourceFrameLayer,
+  .resourcesTitle,
+  .resourceCard,
+  .humanLayer,
+  .agentLayer,
+  .personalAgentLayer,
+  .licensedAgentLayer,
+  .beforeOnly,
+  .agentEraOnly,
+  .licensedOnly,
+  .visionOnly,
+  .sourceControlOnly,
+  .accessPortLayer,
+  .policyFocusLayer
+) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.presentation[data-active-beat="15"] .openingProvocationLayer,
+.presentation[data-active-beat="17"] .profileLayers,
+.presentation[data-active-beat="18"] .standardsProvocationLayer {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.presentation[data-active-beat="17"] .profileDefinition {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.presentation[data-active-beat="17"] :is(
+  .resourceFrameLayer,
+  .resourcesTitle,
+  .resourceCard,
+  .humanLayer,
+  .personalAgentLayer,
+  .visionOnly,
+  .directAccessPortLayer,
+  .agentAccessPortLayer
+) {
+  pointer-events: auto;
+}
+
+.presentation[data-active-beat="17"] .resourceFrameLayer { opacity: 0.52; }
+.presentation[data-active-beat="17"] .resourcesTitle { opacity: 0.62; }
+.presentation[data-active-beat="17"] .resourceCard { opacity: 0.2; }
+.presentation[data-active-beat="17"] :is(.humanLayer, .directAccessPortLayer) { opacity: 0.16; }
+.presentation[data-active-beat="17"] :is(.personalAgentLayer, .agentAccessPortLayer, .visionOnly) { opacity: 1; }
+
+.presentation[data-active-beat="17"] .policyFocusLayer {
+  opacity: 1;
+  transform: matrix(0.264957, 0, 0, 0.146875, 943.034, 286.125);
+}
+
+.presentation[data-active-beat="17"] .policyFocusOuter {
+  fill: transparent;
+  stroke: rgba(38, 49, 45, 0.34);
+}
+
+.presentation[data-active-beat="17"] .policyFocusInner { opacity: 0; }
+
+.presentation[data-active-beat="17"] :is(.visionHumanPublisher, .visionHumanAgent) { opacity: 0.14; }
+.presentation[data-active-beat="17"] .visionAgentPublisher { opacity: 1; }
+
+.presentation[data-active-beat="17"] .visionOnly .flowPath {
+  marker-end: var(--flow-marker);
+  stroke-dashoffset: 0;
+}
+
+.presentation[data-active-beat="17"] :is(.directAccessStatePhysician, .agentAccessStateReaderSession) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.presentation[data-active-beat="16"] :is(
+  .resourceFrameLayer,
+  .resourcesTitle,
+  .humanLayer,
+  .agentLayer
+) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.presentation[data-active-beat="18"] .standardsProvocationSection {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.presentation[data-active-beat="15"] .openingProvocationLine {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.presentation:is([data-active-beat="15"], [data-active-beat="18"]) .canvasShell {
+  top: clamp(21rem, 36vh, 24rem);
+}
+
+@media (min-width: 901px) {
+  .presentation[data-active-beat="15"] .canvasShell {
+    top: clamp(17rem, 27vh, 18.5rem);
+  }
+}
+
+.policyProgressCellText {
+  fill: var(--ink);
+  opacity: 0;
+  transform: translateY(0);
+  transition:
+    opacity 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 460ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.policyGateUserNotSignedState,
+.policyGateUserSignedState,
+.policyGateAgentUnverifiedState,
+.policyGateAgentZdrState {
+  transition:
+    fill 360ms cubic-bezier(0.16, 1, 0.3, 1),
+    stroke 360ms cubic-bezier(0.16, 1, 0.3, 1),
+    stroke-width 360ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.presentation:is([data-active-beat="7"], [data-active-beat="8"], [data-active-beat="9"], [data-active-beat="10"], [data-active-beat="11"]) .narrativeViewport {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.presentation:is([data-active-beat="7"], [data-active-beat="8"], [data-active-beat="9"], [data-active-beat="10"], [data-active-beat="11"]) .canvasShell {
+  inset: 2.6rem clamp(0.5rem, 1.8vw, 2rem) 2.6rem;
+}
+
+.presentation:is([data-active-beat="7"], [data-active-beat="8"], [data-active-beat="9"], [data-active-beat="10"], [data-active-beat="11"]) .relationshipDiagram {
+  transform: translateY(0);
+}
+
+.presentation:is([data-active-beat="7"], [data-active-beat="8"], [data-active-beat="9"], [data-active-beat="10"], [data-active-beat="11"]) .policyFocusLayer {
+  opacity: 1;
+  pointer-events: auto;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+}
+
+.presentation:is([data-active-beat="7"], [data-active-beat="8"], [data-active-beat="9"], [data-active-beat="10"], [data-active-beat="11"]) .policyFocusContent {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 310ms;
+}
+
+.presentation[data-active-beat="7"] .policyFocusContent {
+  transition-delay: 310ms;
+}
+
+.presentation:is([data-active-beat="7"], [data-active-beat="8"], [data-active-beat="9"], [data-active-beat="10"], [data-active-beat="11"]) .policyFocusIntro,
+.presentation[data-active-beat="8"] .policyPermissionSet,
+.presentation:is([data-active-beat="9"], [data-active-beat="10"], [data-active-beat="11"]) .policyEvaluation {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.presentation[data-active-beat="7"] .policyFocusBeat7Title,
+.presentation[data-active-beat="8"] .policyFocusBeat8Title,
+.presentation[data-active-beat="9"] .policyFocusBeat9Title,
+.presentation[data-active-beat="10"] .policyFocusBeat10Title,
+.presentation[data-active-beat="11"] .policyFocusBeat11Title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.presentation[data-active-beat="7"] .policyFocusIntro { transition-delay: 420ms; }
+.presentation[data-active-beat="8"] .policyFocusIntro { transition-delay: 0ms; }
+.presentation[data-active-beat="9"] .policyFocusIntro { transition-delay: 0ms; }
+.presentation[data-active-beat="8"] .policyPermissionSet { transition-delay: 460ms; }
+.presentation:is([data-active-beat="10"], [data-active-beat="11"]) .policyFocusIntro { transition-delay: 0ms; }
+.presentation:is([data-active-beat="9"], [data-active-beat="10"], [data-active-beat="11"]) .policyEvaluation { transition-delay: 120ms; }
+
+.presentation:is([data-active-beat="9"], [data-active-beat="10"], [data-active-beat="11"]) .policyProgressMap {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.presentation[data-active-beat="9"] .policyProgressMap { transition-delay: 240ms; }
+.presentation:is([data-active-beat="10"], [data-active-beat="11"]) .policyProgressMap { transition-delay: 0ms; }
+
+.presentation[data-active-beat="7"] .policyGateUserInput,
+.presentation[data-active-beat="7"] .policyGateAgentInput,
+.presentation[data-active-beat="8"] .policyGateUserInput,
+.presentation[data-active-beat="8"] .policyGateAgentInput,
+.presentation[data-active-beat="9"] .policyGateUserInput,
+.presentation[data-active-beat="9"] .policyGateAgentInput,
+.presentation:is([data-active-beat="10"], [data-active-beat="11"]) .policyGateUserInput,
+.presentation:is([data-active-beat="10"], [data-active-beat="11"]) .policyGateAgentInput,
+.presentation[data-active-beat="8"] .policyGateSynthesis,
+.presentation[data-active-beat="8"] .policyGateCore {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.presentation[data-active-beat="7"] .policyGateUserInput { transition-delay: 460ms; }
+.presentation[data-active-beat="7"] .policyGateAgentInput { transition-delay: 540ms; }
+.presentation[data-active-beat="8"] .policyGateUserInput,
+.presentation[data-active-beat="8"] .policyGateAgentInput,
+.presentation[data-active-beat="9"] .policyGateUserInput,
+.presentation[data-active-beat="9"] .policyGateAgentInput { transition-delay: 0ms; }
+.presentation[data-active-beat="8"] .policyGateCore { transition-delay: 160ms; }
+
+.presentation[data-active-beat="8"] .policyGateUserPath {
+  animation: drawPolicyGatePath 520ms cubic-bezier(0.16, 1, 0.3, 1) 80ms forwards;
+}
+
+.presentation[data-active-beat="8"] .policyGateAgentPath {
+  animation: drawPolicyGatePath 520ms cubic-bezier(0.16, 1, 0.3, 1) 140ms forwards;
+}
+
+.presentation[data-active-beat="8"] .policyGatePath {
+  stroke-dashoffset: 0;
+}
+
+.presentation:is([data-active-beat="9"], [data-active-beat="10"], [data-active-beat="11"]) .policyEvaluationPath {
+  animation: drawPolicyGatePath 560ms cubic-bezier(0.16, 1, 0.3, 1) 160ms forwards;
+}
+
+.presentation[data-active-beat="9"] .policyEvaluationResult00,
+.presentation[data-active-beat="10"] .policyEvaluationResultMiddle,
+.presentation[data-active-beat="11"] .policyEvaluationResult11 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 300ms;
+}
+
+.presentation[data-active-beat="9"] .policyGateUserNotSignedState,
+.presentation[data-active-beat="11"] .policyGateUserSignedState {
+  fill: rgba(182, 83, 59, 0.2);
+  stroke: var(--oxide);
+  stroke-width: 2;
+}
+
+.presentation[data-active-beat="9"] .policyGateAgentUnverifiedState,
+.presentation[data-active-beat="11"] .policyGateAgentZdrState {
+  fill: rgba(182, 83, 59, 0.62);
+  stroke: var(--oxide);
+  stroke-width: 2;
+}
+
+.presentation[data-active-beat="9"] .policyProgressCell00 .policyProgressCellFill,
+.presentation[data-active-beat="10"] .policyProgressCell01 .policyProgressCellFill,
+.presentation[data-active-beat="10"] .policyProgressCell10 .policyProgressCellFill,
+.presentation[data-active-beat="11"] .policyProgressCell11 .policyProgressCellFill {
+  fill: rgba(182, 83, 59, 0.13);
+  stroke: var(--oxide);
+  stroke-width: 2;
+}
+
+.presentation[data-active-beat="9"] .policyProgressCell00 .policyProgressCellText,
+.presentation[data-active-beat="10"] .policyProgressCell01 .policyProgressCellText,
+.presentation[data-active-beat="10"] .policyProgressCell10 .policyProgressCellText,
+.presentation[data-active-beat="11"] .policyProgressCell11 .policyProgressCellText {
+  opacity: 1;
+}
+
+.presentation[data-active-beat="10"] :is(.policyProgressCell01, .policyProgressCell10) :is(.policyProgressCellFill, .policyProgressCellText) {
+  transition-delay: 600ms;
+}
+
+.presentation:is([data-active-beat="10"], [data-active-beat="11"]) .policyProgressCell00 .policyProgressCellFill,
+.presentation[data-active-beat="11"] .policyProgressCell01 .policyProgressCellFill,
+.presentation[data-active-beat="11"] .policyProgressCell10 .policyProgressCellFill {
+  fill: rgba(182, 83, 59, 0.055);
+  stroke: rgba(182, 83, 59, 0.5);
+}
+
+.presentation:is([data-active-beat="10"], [data-active-beat="11"]) .policyProgressCell00 .policyProgressCellText,
+.presentation[data-active-beat="11"] .policyProgressCell01 .policyProgressCellText,
+.presentation[data-active-beat="11"] .policyProgressCell10 .policyProgressCellText {
+  opacity: 0.62;
+}
+
+.presentation:is([data-active-beat="7"], [data-active-beat="8"], [data-active-beat="9"], [data-active-beat="10"], [data-active-beat="11"]) :is(
+  .resourceFrameLayer,
+  .resourcesTitle,
+  .resourceCard,
+  .humanLayer,
+  .agentLayer,
+  .personalAgentLayer,
+  .licensedAgentLayer,
+  .beforeOnly,
+  .agentEraOnly,
+  .licensedOnly,
+  .visionOnly,
+  .sourceControlOnly,
+  .accessPortLayer
+) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.presentation[data-active-beat="14"] .resourcesTitle {
+  fill: #777e79;
+  font-size: 30px;
+  letter-spacing: -0.025em;
+  transform: translateY(-109px);
+}
+
+.presentation[data-active-beat="14"] .canvasShell {
+  top: clamp(23rem, 37vh, 25rem);
+}
+
+.presentation[data-active-beat="14"] :is(
+  .resourceCard,
+  .visionOnly,
+  .personalAgentLayer,
+  .directAccessPortLayer,
+  .agentAccessPortLayer
+) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.presentation[data-active-beat="14"] .visionOnly {
+  transition-delay: 160ms;
+}
+
+.presentation[data-active-beat="14"] .visionOnly .flowPath {
+  animation: drawFlowPath var(--flow-duration, 680ms) cubic-bezier(0.16, 1, 0.3, 1)
+    calc(var(--flow-delay, 80ms) + 260ms) both;
+}
+
+.presentation[data-active-beat="14"] :is(
+  .directAccessStatePhysician,
+  .agentAccessStatePhysician,
+  .agentAccessPolicyEyebrow
+) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.presentation[data-active-beat="14"] .agentAccessDefaultEyebrow {
+  opacity: 0;
+  transform: translateY(-3px);
+}
+
+.presentation[data-active-beat="14"] .directAccessPortLayer {
+  opacity: 1;
+}
+
+@keyframes drawFlowPath {
+  from {
+    marker-end: none;
+    stroke-dashoffset: 1;
+  }
+  99% { marker-end: none; }
+  to {
+    marker-end: var(--flow-marker);
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes drawPolicyGatePath {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes revealRailLabel {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .presentation {
+    --counter-size: 0.82rem;
+    --eyebrow-size: 0.95rem;
+  }
+
+  .presentationHeader {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .canvasShell {
+    inset: 16.25rem -16rem 3rem;
+  }
+
+  .narrativeBand {
+    align-content: start;
+    display: grid;
+    gap: 0.7rem;
+    grid-template-columns: 3px minmax(0, 1fr);
+    min-height: inherit;
+    padding: 4.65rem 1.25rem 1.8rem;
+  }
+
+  .narrativeViewport { min-height: 16.25rem; }
+
+  .narrativeViewport:is(
+    [data-narrative-id="opening-provocation"],
+    [data-narrative-id="three-parties"],
+    [data-narrative-id="webmcp-and-openinquiry"],
+    [data-narrative-id="standards-provocation"]
+  ) {
+    min-height: 21.5rem;
+  }
+
+  .narrativeViewport[data-narrative-id="vision"] {
+    min-height: 17.5rem;
+  }
+
+  .presentation[data-active-beat="6"] .canvasShell {
+    top: 17.5rem;
+  }
+
+  .presentation:is([data-active-beat="15"], [data-active-beat="16"], [data-active-beat="17"], [data-active-beat="18"]) .canvasShell {
+    top: 21.5rem;
+  }
+
+  .narrativeBand::before { min-height: 8.25rem; }
+
+  .narrativeCopy {
+    display: block;
+  }
+
+  .narrativeCopy h1,
+  .narrativeCopy h2 {
+    font-size: clamp(2.2rem, 8vw, 2.8rem);
+    max-width: none;
+  }
+
+  .narrativeViewport[data-narrative-id="webmcp-and-openinquiry"] .narrativeCopy h2[data-title-lines="2"] {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    white-space: normal;
+    text-wrap: balance;
+  }
+
+  .presentation[data-active-beat="5"] .canvasShell {
+    top: 18rem;
+  }
+
+  .presentation:is(
+    [data-active-beat="2"],
+    [data-active-beat="3"],
+    [data-active-beat="4"],
+    [data-active-beat="5"],
+    [data-active-beat="6"],
+    [data-active-beat="14"],
+    [data-active-beat="16"],
+    [data-active-beat="17"]
+  ) .canvasShell {
+    top: 23rem;
+  }
+
+  .presentation:is(
+    [data-active-beat="2"],
+    [data-active-beat="3"],
+    [data-active-beat="4"],
+    [data-active-beat="5"],
+    [data-active-beat="6"],
+    [data-active-beat="14"],
+    [data-active-beat="16"],
+    [data-active-beat="17"]
+  ) .relationshipDiagram {
+    transform: scale(0.5);
+    transform-origin: center top;
+  }
+
+  .presentation:is([data-active-beat="15"], [data-active-beat="18"]) .relationshipDiagram {
+    transform: scale(0.5);
+    transform-origin: center top;
+  }
+
+  .presentation[data-active-beat="17"] .profileLayers {
+    transform: translateY(-55px);
+  }
+
+  .narrativeCopy > p {
+    margin-bottom: 0.65rem;
+  }
+
+  .narrativeCopy span {
+    font-family: var(--serif);
+    font-size: 1.12rem;
+    margin-top: 0.85rem;
+    max-width: 35rem;
+  }
+
+  .scrollCue { left: 1.25rem; }
+  .beatNavigation { right: 0; }
+}
+
+/*
+ * Chrome commonly presents the deck in a wide, comparatively short viewport.
+ * Width-driven display type that feels balanced in the tall in-app browser can
+ * consume nearly twice the proportional height here. Use a short-screen type
+ * scale and give the saved height back to the shared relationship canvas.
+ */
+@media (min-width: 901px) and (min-height: 741px) and (max-height: 1100px) {
+  .presentation {
+    --eyebrow-size: 0.95rem;
+  }
+
+  .presentation .narrativeViewport {
+    min-height: 18.75rem;
+  }
+
+  .narrativeBand {
+    padding-bottom: 1rem;
+    padding-top: 4.15rem;
+  }
+
+  .narrativeCopy > p {
+    margin-bottom: 0.65rem;
+  }
+
+  .narrativeCopy h1,
+  .narrativeCopy h2 {
+    font-size: clamp(3.25rem, 3.65vw, 3.75rem);
+  }
+
+  .narrativeCopy span {
+    font-size: clamp(1.15rem, 1.3vw, 1.3rem);
+    margin-top: 0.9rem;
+  }
+
+  .narrativeViewport[data-narrative-id="webmcp-and-openinquiry"] .narrativeCopy h2[data-title-lines="2"] {
+    font-size: min(3.55rem, 3.55vw);
+  }
+
+  .canvasShell {
+    bottom: 2rem;
+    top: clamp(20.5rem, 36vh, 21.5rem);
+  }
+
+  .presentation[data-active-beat="14"] .canvasShell {
+    top: clamp(20.5rem, 36vh, 21.5rem);
+  }
+
+  .relationshipDiagram {
+    transform: translateY(0);
+  }
+
+  .presentation:is(
+    [data-active-beat="2"],
+    [data-active-beat="3"],
+    [data-active-beat="4"],
+    [data-active-beat="5"],
+    [data-active-beat="6"],
+    [data-active-beat="14"],
+    [data-active-beat="16"],
+    [data-active-beat="17"]
+  ) .relationshipDiagram {
+    transform: scale(0.84);
+    transform-origin: center top;
+  }
+
+  .presentation:is(
+    [data-active-beat="7"],
+    [data-active-beat="8"],
+    [data-active-beat="9"],
+    [data-active-beat="10"],
+    [data-active-beat="11"]
+  ) .relationshipDiagram {
+    transform: scale(0.84);
+    transform-origin: center top;
+  }
+
+  .presentation:is(
+    [data-story-index="2"],
+    [data-story-index="3"],
+    [data-story-index="4"],
+    [data-story-index="5"],
+    [data-story-index="6"],
+    [data-story-index="7"],
+    [data-story-index="8"]
+  ) .relationshipDiagram {
+    transform: translateY(-72px) scale(0.84);
+  }
+
+  .presentation[data-active-beat="17"] .profileLayers {
+    transform: translateY(-55px) scale(1.08);
+    transform-box: fill-box;
+    transform-origin: center top;
+  }
+}
+
+@media (min-width: 901px) and (max-height: 740px) {
+  .presentation {
+    --counter-size: 0.78rem;
+    --eyebrow-size: 0.9rem;
+  }
+
+  .canvasShell { bottom: 3rem; top: 17.5rem; }
+  .presentation[data-active-beat="14"] .canvasShell { top: 17.5rem; }
+  .narrativeViewport { min-height: 10.75rem; }
+  .narrativeBand { min-height: 10.75rem; padding-top: 3.85rem; }
+  .narrativeBand::before { min-height: 5.25rem; }
+  .narrativeCopy h1,
+  .narrativeCopy h2 { font-size: clamp(1.9rem, 2.8vw, 2.8rem); }
+  .narrativeViewport[data-narrative-id="webmcp-and-openinquiry"] .narrativeCopy h2[data-title-lines="2"] {
+    font-size: min(2.5rem, 3.35vw);
+  }
+  .narrativeCopy > p {
+    margin-bottom: 0.5rem;
+  }
+  .narrativeCopy span { font-size: 1rem; margin-top: 0.55rem; }
+
+  .presentation:is(
+    [data-active-beat="2"],
+    [data-active-beat="3"],
+    [data-active-beat="4"],
+    [data-active-beat="5"],
+    [data-active-beat="6"],
+    [data-active-beat="14"],
+    [data-active-beat="16"],
+    [data-active-beat="17"]
+  ) .relationshipDiagram {
+    transform: scale(0.8);
+    transform-origin: center top;
+  }
+
+  .presentation:is(
+    [data-active-beat="7"],
+    [data-active-beat="8"],
+    [data-active-beat="9"],
+    [data-active-beat="10"],
+    [data-active-beat="11"]
+  ) .relationshipDiagram {
+    transform: scale(0.82);
+    transform-origin: center top;
+  }
+
+  .presentation[data-active-beat="17"] .profileLayers {
+    transform: translateY(-78px) scale(1.25);
+    transform-box: fill-box;
+    transform-origin: center top;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resourceFrame,
+  .resourceFrameInner,
+  .resourceFrameLayer,
+  .resourcesTitle,
+  .humanLayer,
+  .visionOnly,
+  .sourceControlOnly,
+  .beforeOnly,
+  .agentEraOnly,
+  .licensedOnly,
+  .agentLayer,
+  .personalAgentLayer,
+  .licensedAgentLayer,
+  .accessPortLayer,
+  .accessPortState,
+  .agentAccessDefaultEyebrow,
+  .agentAccessPolicyEyebrow,
+  .sourceAuthorityState,
+  .trustedHandlingState,
+  .policyFocusLayer,
+  .policyFocusOuter,
+  .policyFocusInner,
+  .policyFocusContent,
+  .policyFocusBeatTitle,
+  .policyFocusIntro,
+  .policyFocusDetails,
+  .policyGateUserInput,
+  .policyGateAgentInput,
+  .policyGateSynthesis,
+  .policyGateCore,
+  .policyPermissionSet,
+  .policyEvaluation,
+  .policyEvaluationResult,
+  .policyProgressMap,
+  .policyProgressCell,
+  .policyGateUserNotSignedState,
+  .policyGateUserSignedState,
+  .policyGateAgentUnverifiedState,
+  .policyGateAgentZdrState,
+  .policyMatrixBoundedResult,
+  .policyMatrixFullResult,
+  .policyMatrixActiveCell,
+  .policyMatrixActiveColumnRule,
+  .resourceCard,
+  .sourceContextPath,
+  .openingProvocationLayer,
+  .openingProvocationLine,
+  .profileLayers,
+  .profileDefinition,
+  .visionHumanPublisher,
+  .visionAgentPublisher,
+  .visionHumanAgent,
+  .standardsProvocationLayer,
+  .standardsProvocationSection,
+  .canvasShell,
+  .relationshipDiagram,
+  .narrativeViewport {
+    transition-duration: 1ms;
+    transition-delay: 0ms;
+  }
+
+  .narrativeBand,
+  .beatNavigation button > span,
+  .scrollCue {
+    transition-duration: 1ms;
+  }
+
+  .flowPath {
+    animation: none !important;
+    stroke-dashoffset: 0;
+  }
+  .presentation[data-active-beat="3"] .resourceResponseLabel {
+    animation: none;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .presentation[data-active-beat="7"] .policyFocusLayer,
+  .presentation[data-active-beat="7"] .policyFocusContent,
+  .presentation[data-active-beat="7"] .policyFocusIntro,
+  .presentation[data-active-beat="7"] .policyGateUserInput,
+  .presentation[data-active-beat="7"] .policyGateAgentInput,
+  .presentation[data-active-beat="8"] .policyFocusIntro,
+  .presentation[data-active-beat="8"] .policyGateUserInput,
+  .presentation[data-active-beat="8"] .policyGateAgentInput,
+  .presentation[data-active-beat="8"] .policyGateCore,
+  .presentation[data-active-beat="8"] .policyPermissionSet,
+  .presentation[data-active-beat="9"] .policyFocusIntro,
+  .presentation[data-active-beat="9"] .policyGateUserInput,
+  .presentation[data-active-beat="9"] .policyGateAgentInput,
+  .presentation:is([data-active-beat="10"], [data-active-beat="11"]) .policyFocusIntro,
+  .presentation:is([data-active-beat="9"], [data-active-beat="10"], [data-active-beat="11"]) .policyEvaluation,
+  .presentation:is([data-active-beat="9"], [data-active-beat="10"], [data-active-beat="11"]) .policyEvaluationResult {
+    transition-delay: 0ms;
+  }
+  .presentation[data-active-beat="8"] .policyGatePath {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .presentation:is([data-active-beat="9"], [data-active-beat="10"], [data-active-beat="11"]) .policyEvaluationPath {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .presentation[data-active-beat="1"] .directAccessStateOpening,
+  .presentation[data-active-beat="3"] .directAccessStatePhysician,
+  .presentation[data-active-beat="5"] .directAccessStatePhysician,
+  .presentation[data-active-beat="6"] .directAccessStatePhysician,
+  .presentation[data-active-beat="7"] .directAccessStatePhysician,
+  .presentation[data-active-beat="8"] .directAccessStatePhysician,
+  .presentation[data-active-beat="1"] .agentAccessStateOpening,
+  .presentation[data-active-beat="4"] .agentAccessStateDenied,
+  .presentation[data-active-beat="5"] .agentAccessStatePartnership,
+  .presentation[data-active-beat="6"] .agentAccessStatePhysician,
+  .presentation[data-active-beat="7"] .agentAccessStateSourceBounded,
+  .presentation[data-active-beat="8"] .agentAccessStateSourceFull {
+    transition-delay: 0ms;
+  }
+  .flowPath.flowArrowInk { marker-end: url("#presentation-arrow-ink"); }
+  .flowPath.flowArrowOxide { marker-end: url("#presentation-arrow-oxide"); }
+}

@@ -1,0 +1,109 @@
+{
+  "license": "Apache-2.0",
+  "vectorSet": "openinquiry-0.1-provider-neutral-semantics",
+  "version": "0.1.0",
+  "vectors": [
+    {
+      "id": "positive-publisher-bounded-unit",
+      "description": "A publisher preserves provider identity, source metadata, an exact bounded grant, access, rights, canonical actions, and a minimized receipt.",
+      "base": "publisher",
+      "expected": "accept"
+    },
+    {
+      "id": "positive-society-corrected-resource",
+      "description": "A society keeps a correction status, status route, correction warning, and responsible organization attached.",
+      "base": "society",
+      "expected": "accept"
+    },
+    {
+      "id": "positive-library-link-only-route",
+      "description": "A library names the actual rights holder and supplies metadata plus an exact route rather than protected third-party content.",
+      "base": "library",
+      "expected": "accept"
+    },
+    {
+      "id": "positive-provider-boundary-error",
+      "description": "A provider error remains a valid privacy-minimized envelope without echoing a request.",
+      "base": "boundaryError",
+      "expected": "accept"
+    },
+    {
+      "id": "negative-receipt-provider-mismatch",
+      "description": "A receipt cannot be detached from the provider that issued the response.",
+      "base": "publisher",
+      "mutations": [
+        { "op": "replace", "path": "/receipt/providerId", "value": "different-provider" }
+      ],
+      "expected": "reject",
+      "expectedLayer": "semantic",
+      "expectedDiagnostic": "receipt.providerId must match provider.id"
+    },
+    {
+      "id": "negative-library-missing-rights-holder",
+      "description": "A library resource response cannot imply ownership by omitting the actual rights holder.",
+      "base": "library",
+      "mutations": [
+        { "op": "remove", "path": "/provider/rightsHolderName" }
+      ],
+      "expected": "reject",
+      "expectedLayer": "semantic",
+      "expectedDiagnostic": "library resource responses must identify the actual rights holder"
+    },
+    {
+      "id": "negative-canonical-action-detached",
+      "description": "A useful resource must retain an exact open or deep-link action to its canonical provider context.",
+      "base": "publisher",
+      "mutations": [
+        { "op": "replace", "path": "/actions/0/url", "value": "https://publisher.example.test/unrelated" }
+      ],
+      "expected": "reject",
+      "expectedLayer": "semantic",
+      "expectedDiagnostic": "lacks an exact canonical action"
+    },
+    {
+      "id": "negative-corrected-warning-dropped",
+      "description": "A client or provider cannot silently drop the warning attached to a corrected resource.",
+      "base": "society",
+      "mutations": [
+        { "op": "remove", "path": "/warnings" }
+      ],
+      "expected": "reject",
+      "expectedLayer": "semantic",
+      "expectedDiagnostic": "corrected resource must carry a correction warning"
+    },
+    {
+      "id": "negative-withdrawn-content-supplied",
+      "description": "A withdrawn resource remains discoverable as metadata but cannot supply a retrieved content unit.",
+      "base": "publisher",
+      "mutations": [
+        { "op": "replace", "path": "/resources/0/status", "value": "withdrawn" },
+        { "op": "add", "path": "/resources/0/statusUrl", "value": "https://publisher.example.test/article/example-article-001/status" }
+      ],
+      "expected": "reject",
+      "expectedLayer": "semantic",
+      "expectedDiagnostic": "retrieval must not supply a retracted or withdrawn content unit"
+    },
+    {
+      "id": "negative-orphan-content-grant",
+      "description": "A supplied content unit cannot be detached from its resource metadata.",
+      "base": "publisher",
+      "mutations": [
+        { "op": "replace", "path": "/grants/0/resourceId", "value": "unknown-resource" }
+      ],
+      "expected": "reject",
+      "expectedLayer": "semantic",
+      "expectedDiagnostic": "resourceId has no matching resource"
+    },
+    {
+      "id": "negative-receipt-query-field",
+      "description": "A receipt carrying query text violates the closed, privacy-minimized 0.1 receipt contract.",
+      "base": "publisher",
+      "mutations": [
+        { "op": "add", "path": "/receipt/query", "value": "sensitive raw query must not survive" }
+      ],
+      "expected": "reject",
+      "expectedLayer": "schema",
+      "expectedDiagnostic": "query"
+    }
+  ]
+}

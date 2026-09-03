@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "profileVersion": "0.1",
+  "mappingStatus": "explicit-conceptual-mapping-only",
+  "odrlConformanceClaimed": false,
+  "mappings": [
+    { "openInquiry": "KnowledgeResource", "odrlConcept": "Asset" },
+    { "openInquiry": "ProviderIdentity or rightsHolderName", "odrlConcept": "Assigner party" },
+    { "openInquiry": "RightsDecision.allowedUses", "odrlConcept": "Permission and action" },
+    { "openInquiry": "RightsDecision.prohibitedUses", "odrlConcept": "Prohibition and action" },
+    { "openInquiry": "RightsDecision.attribution", "odrlConcept": "Duty" },
+    { "openInquiry": "RightsDecision.limits", "odrlConcept": "Constraint" },
+    { "openInquiry": "RightsDecision.policyId or policyUrl", "odrlConcept": "Policy identifier or reference" }
+  ],
+  "note": "OpenInquiry 0.1 uses a compact developer-facing vocabulary. This mapping does not claim ODRL/JSON-LD serialization or ODRL conformance."
+}

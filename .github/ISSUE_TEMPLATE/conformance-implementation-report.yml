@@ -1,0 +1,75 @@
+name: Conformance or implementation report
+description: Publish bounded evidence about one OpenInquiry implementation, including failures and deviations.
+title: "[Implementation report]: "
+labels:
+  - documentation
+body:
+  - type: markdown
+    attributes:
+      value: |
+        An implementation report is evidence about one implementation. It is not an adopter badge, certification, legal opinion, endorsement, governance decision, or response SLA.
+
+        Do not submit PHI, secrets, credentials, full prompts, private queries, paywalled text, or non-public exploit details. For sensitive security matters, open only a sanitized coordination request with no operational details because this repository has no private reporting route.
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation, organization, repository, and revision
+      description: Provide a public implementation name/version, organization, authorized public repository, and commit or build identifier.
+    validations:
+      required: true
+  - type: textarea
+    id: profile-suite
+    attributes:
+      label: Profile version and schema or test-suite version/digest
+    validations:
+      required: true
+  - type: textarea
+    id: classes-independence
+    attributes:
+      label: Claimed classes and implementation independence
+      description: State the provider, client, and runtime classes actually exercised. State whether codebases, policy engines, serializers, or organizational control are shared.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment and date
+      description: Include client, browser, model, account or workspace type, route, fixture, and date as appropriate; do not include credentials or private user data.
+    validations:
+      required: true
+  - type: textarea
+    id: feature-results
+    attributes:
+      label: Feature results
+      description: For each requirement ID, record feature, pass/fail/not implemented, and public evidence.
+      placeholder: "OI-REQ-001 | feature | pass | public fixture or test link"
+    validations:
+      required: true
+  - type: textarea
+    id: output-budgets
+    attributes:
+      label: Output budgets
+      description: For each tool and fixture, record UTF-8 bytes and whether the client preserved mandatory bindings.
+    validations:
+      required: true
+  - type: textarea
+    id: deviations-review
+    attributes:
+      label: Deviations, known failures, and review performed
+      description: Include the scope and limitations of security, privacy, and accessibility review; do not include sensitive findings or exploit details.
+    validations:
+      required: true
+  - type: textarea
+    id: mappings-conflicts
+    attributes:
+      label: External mappings and relevant conflicts
+      description: Label each mapping as reuse, mapping candidate, or analogy. Disclose material commercial relationships.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-content confirmation
+      options:
+        - label: I have removed PHI, secrets, credentials, full prompts, private queries, paywalled text, and non-public exploit details.
+          required: true

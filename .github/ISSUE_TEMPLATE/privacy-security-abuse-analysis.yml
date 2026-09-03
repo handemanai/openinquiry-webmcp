@@ -1,0 +1,67 @@
+name: Public privacy, security, or abuse analysis
+description: Submit a safe public analysis or a sanitized coordination request without sensitive operational details.
+title: "[Privacy/security/abuse]: "
+labels:
+  - question
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is a public discussion form, not a private vulnerability-reporting channel. It supports either a safe public analysis or a sanitized coordination request.
+
+        Do not submit PHI, secrets, credentials, full prompts, private queries, paywalled text, or non-public exploit details. For a sensitive security matter, select sanitized coordination and include only the affected area and a safe public contact method; omit reproduction steps, payloads, affected accounts, exploit chains, and other operational details. This repository has no private reporting route.
+  - type: dropdown
+    id: report-type
+    attributes:
+      label: Submission type
+      options:
+        - Safe public analysis
+        - Sanitized coordination request
+    validations:
+      required: true
+  - type: textarea
+    id: affected-area
+    attributes:
+      label: Affected area
+      description: Name the route, component, policy boundary, or public feature without sensitive detail.
+    validations:
+      required: true
+  - type: input
+    id: safe-contact
+    attributes:
+      label: Safe public coordination handle or contact method
+      description: Required for sanitized coordination. For a public analysis with no follow-up request, enter “not requested.”
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Public-analysis summary (optional)
+      description: Leave blank for a sanitized coordination request.
+  - type: textarea
+    id: context
+    attributes:
+      label: Browser-agent journey, resource, and authority (optional)
+      description: Use a public, synthetic, or permissioned example only. Leave blank for sanitized coordination.
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Present behavior and failure or ambiguity (optional)
+      description: Leave blank for sanitized coordination.
+  - type: textarea
+    id: analysis
+    attributes:
+      label: Data flow, threat, control, retention, and proposed change (optional)
+      description: Keep public analysis high-level and non-operational. Leave blank for sanitized coordination.
+  - type: textarea
+    id: effects-evidence
+    attributes:
+      label: Effects, evidence, fixtures, sources, and relevant conflicts (optional)
+      description: Link public evidence only; do not include sensitive proof-of-concept material. Leave blank for sanitized coordination.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-content confirmation
+      options:
+        - label: I have removed PHI, secrets, credentials, full prompts, private queries, paywalled text, and non-public exploit details.
+          required: true

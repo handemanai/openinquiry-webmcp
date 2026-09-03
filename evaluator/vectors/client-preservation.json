@@ -1,0 +1,50 @@
+{
+  "license": "Apache-2.0",
+  "vectorSet": "openinquiry-0.1-client-preservation",
+  "version": "0.1.0",
+  "vectors": [
+    {
+      "id": "client-preserves-publisher-metadata",
+      "description": "The adapter must return the accepted response without changing author order, identifiers, dates, locators, status metadata, rights, actions, warnings, or transport metadata.",
+      "base": "publisher",
+      "expected": "accept",
+      "adapterMetadata": {
+        "opaqueEvaluatorField": "must survive unchanged",
+        "unknownNestedMetadata": {
+          "vendor": "outside-the-profile",
+          "sequence": [3, 1, 2],
+          "nullable": null
+        }
+      }
+    },
+    {
+      "id": "client-preserves-correction-binding",
+      "description": "The adapter must preserve the exact corrected-resource warning and its provider-issued canonical action.",
+      "base": "society",
+      "expected": "accept",
+      "adapterMetadata": {
+        "opaqueEvaluatorField": "correction-binding-probe",
+        "displayHint": {
+          "unknownToAdapter": true
+        }
+      }
+    },
+    {
+      "id": "client-unknown-field-rejected-not-sanitized",
+      "description": "OpenInquiry 0.1 objects are closed. An unknown profile field must be rejected; deleting or rewriting it and accepting the remainder is a failure.",
+      "base": "publisher",
+      "mutations": [
+        { "op": "add", "path": "/provider/vendorInternalId", "value": "must-not-be-silently-stripped" }
+      ],
+      "expected": "reject",
+      "expectedLayer": "schema",
+      "expectedDiagnostic": "vendorInternalId",
+      "adapterMetadata": {
+        "opaqueEvaluatorField": "still-must-survive-on-rejection",
+        "unknownNestedMetadata": {
+          "preserve": ["provider", "status", "rights", "receipt"]
+        }
+      }
+    }
+  ]
+}

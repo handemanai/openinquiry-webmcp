@@ -1,0 +1,331 @@
+{
+  "$license": "CC-BY-4.0",
+  "publisher": {
+    "profile": {
+      "name": "openinquiry.publisher-knowledge-access",
+      "version": "0.1"
+    },
+    "status": "ok",
+    "provider": {
+      "id": "example-scholarly-press",
+      "name": "Example Scholarly Press",
+      "role": "publisher",
+      "canonicalUrl": "https://publisher.example.test",
+      "policyUrl": "https://publisher.example.test/agent-policy"
+    },
+    "access": {
+      "state": "entitled",
+      "basis": "personal_subscription",
+      "basisLabel": "Example individual subscription",
+      "decidedBy": "example-scholarly-press",
+      "validUntil": "2030-01-01T00:00:00Z"
+    },
+    "rights": {
+      "policyId": "example-bounded-unit-v1",
+      "decision": "allow_with_limits",
+      "allowedUses": ["display", "link", "quote", "summarize"],
+      "prohibitedUses": ["bulk_export", "redistribute", "persistent_storage", "model_training"],
+      "limits": {
+        "maxCharacters": 320,
+        "maxSegments": 1,
+        "expiresAt": "2030-01-01T00:00:00Z"
+      },
+      "attribution": {
+        "required": true,
+        "text": "Avery Morgan and Riley Chen. Example Scholarly Press.",
+        "mustLinkToCanonical": true
+      },
+      "requestedHandling": {
+        "retention": "transient_only",
+        "training": "not_permitted",
+        "verification": "not_verified_by_webmcp"
+      },
+      "policyUrl": "https://publisher.example.test/agent-policy"
+    },
+    "resources": [
+      {
+        "id": "example-article-001",
+        "type": "journal_article",
+        "title": "A Synthetic Article for Adapter Evaluation",
+        "authors": [
+          {
+            "name": "Avery Morgan",
+            "identifier": "https://orcid.org/0000-0000-0000-0001"
+          },
+          {
+            "name": "Riley Chen",
+            "identifier": "https://orcid.org/0000-0000-0000-0002"
+          }
+        ],
+        "responsibleOrganization": "Example Scholarly Press",
+        "containerTitle": "Journal of Synthetic Interoperability",
+        "identifiers": [
+          { "scheme": "doi", "value": "10.0000/example.001" },
+          { "scheme": "local", "value": "example-article-001" }
+        ],
+        "canonicalUrl": "https://publisher.example.test/article/example-article-001",
+        "deepLink": "https://publisher.example.test/article/example-article-001#results",
+        "locator": {
+          "sectionTitle": "Results",
+          "sectionId": "results",
+          "page": "7"
+        },
+        "dates": {
+          "published": "2029-03-14",
+          "updated": "2029-04-01",
+          "checked": "2029-04-02T10:00:00Z"
+        },
+        "version": "1.1",
+        "status": "updated",
+        "statusNote": "The provider refreshed supplementary metadata.",
+        "statusUrl": "https://publisher.example.test/article/example-article-001/status"
+      }
+    ],
+    "grants": [
+      {
+        "resourceId": "example-article-001",
+        "representation": "quotation",
+        "content": "This synthetic bounded unit exists only to evaluate an OpenInquiry adapter. It is not the complete work and is not for clinical use.",
+        "locator": {
+          "sectionTitle": "Results",
+          "sectionId": "results",
+          "page": "7"
+        },
+        "suppliedByProvider": true,
+        "contentDigest": "sha256:example-returned-unit"
+      }
+    ],
+    "receipt": {
+      "receiptId": "example-receipt-publisher-001",
+      "issuedAt": "2029-04-02T10:00:00Z",
+      "providerId": "example-scholarly-press",
+      "toolName": "knowledge_retrieve",
+      "resourceIds": ["example-article-001"],
+      "accessState": "entitled",
+      "accessBasis": "personal_subscription",
+      "policyId": "example-bounded-unit-v1",
+      "decision": "supplied",
+      "returnedUnitDigest": "sha256:example-returned-unit",
+      "retention": "session"
+    },
+    "actions": [
+      {
+        "type": "deep_link",
+        "label": "Open the evaluated source section",
+        "url": "https://publisher.example.test/article/example-article-001#results",
+        "providerId": "example-scholarly-press"
+      },
+      {
+        "type": "subscribe",
+        "label": "Manage subscription",
+        "url": "https://publisher.example.test/subscribe",
+        "providerId": "example-scholarly-press"
+      }
+    ],
+    "warnings": [
+      {
+        "code": "RESOURCE_UPDATED",
+        "message": "The provider reports refreshed supplementary metadata."
+      }
+    ]
+  },
+  "society": {
+    "profile": {
+      "name": "openinquiry.publisher-knowledge-access",
+      "version": "0.1"
+    },
+    "status": "ok",
+    "provider": {
+      "id": "example-professional-society",
+      "name": "Example Professional Society",
+      "role": "society",
+      "canonicalUrl": "https://society.example.test",
+      "policyUrl": "https://society.example.test/agent-policy"
+    },
+    "access": {
+      "state": "public",
+      "basis": "public_web",
+      "decidedBy": "example-professional-society"
+    },
+    "rights": {
+      "policyId": "example-corrected-guidance-v1",
+      "decision": "allow",
+      "allowedUses": ["display", "link", "summarize"],
+      "prohibitedUses": ["bulk_export", "redistribute"],
+      "attribution": {
+        "required": true,
+        "text": "Example Professional Society Guidance Committee.",
+        "mustLinkToCanonical": true
+      }
+    },
+    "resources": [
+      {
+        "id": "example-guidance-001",
+        "type": "guideline",
+        "title": "Synthetic Guidance for Adapter Evaluation",
+        "authors": [
+          { "name": "Example Guidance Committee" }
+        ],
+        "responsibleOrganization": "Example Professional Society",
+        "canonicalUrl": "https://society.example.test/guidance/example-guidance-001",
+        "deepLink": "https://society.example.test/guidance/example-guidance-001#recommendation-2",
+        "locator": {
+          "sectionTitle": "Recommendation 2",
+          "sectionId": "recommendation-2"
+        },
+        "dates": {
+          "published": "2029-02-01",
+          "updated": "2029-03-01",
+          "checked": "2029-04-02T10:01:00Z"
+        },
+        "version": "1.1",
+        "status": "corrected",
+        "statusNote": "A wording correction is attached to this synthetic resource.",
+        "statusUrl": "https://society.example.test/guidance/example-guidance-001/status"
+      }
+    ],
+    "grants": [
+      {
+        "resourceId": "example-guidance-001",
+        "representation": "summary",
+        "content": "A corrected synthetic provider-authored summary for adapter evaluation. Not for clinical use.",
+        "locator": {
+          "sectionTitle": "Recommendation 2",
+          "sectionId": "recommendation-2"
+        },
+        "suppliedByProvider": true
+      }
+    ],
+    "receipt": {
+      "receiptId": "example-receipt-society-001",
+      "issuedAt": "2029-04-02T10:01:00Z",
+      "providerId": "example-professional-society",
+      "toolName": "knowledge_retrieve",
+      "resourceIds": ["example-guidance-001"],
+      "accessState": "public",
+      "accessBasis": "public_web",
+      "policyId": "example-corrected-guidance-v1",
+      "decision": "supplied",
+      "retention": "provider_policy"
+    },
+    "actions": [
+      {
+        "type": "deep_link",
+        "label": "Open corrected guidance",
+        "url": "https://society.example.test/guidance/example-guidance-001#recommendation-2",
+        "providerId": "example-professional-society"
+      }
+    ],
+    "warnings": [
+      {
+        "code": "RESOURCE_CORRECTED",
+        "message": "The provider reports a wording correction."
+      }
+    ]
+  },
+  "library": {
+    "profile": {
+      "name": "openinquiry.publisher-knowledge-access",
+      "version": "0.1"
+    },
+    "status": "ok",
+    "provider": {
+      "id": "example-research-library",
+      "name": "Example Research Library",
+      "role": "library",
+      "canonicalUrl": "https://library.example.test",
+      "rightsHolderName": "Example Scholarly Press"
+    },
+    "access": {
+      "state": "entitled",
+      "basis": "library_resolution",
+      "basisLabel": "Example institutional route",
+      "decidedBy": "example-research-library"
+    },
+    "rights": {
+      "policyId": "example-library-route-v1",
+      "decision": "allow_with_limits",
+      "allowedUses": ["display", "link"],
+      "prohibitedUses": ["bulk_export", "redistribute"],
+      "attribution": {
+        "required": true,
+        "mustLinkToCanonical": true
+      }
+    },
+    "resources": [
+      {
+        "id": "example-article-001",
+        "type": "journal_article",
+        "title": "A Synthetic Article for Adapter Evaluation",
+        "authors": [
+          { "name": "Avery Morgan" },
+          { "name": "Riley Chen" }
+        ],
+        "responsibleOrganization": "Example Scholarly Press",
+        "canonicalUrl": "https://publisher.example.test/article/example-article-001",
+        "deepLink": "https://publisher.example.test/article/example-article-001",
+        "dates": {
+          "published": "2029-03-14",
+          "checked": "2029-04-02T10:02:00Z"
+        },
+        "version": "1.1",
+        "status": "current"
+      }
+    ],
+    "grants": [
+      {
+        "resourceId": "example-article-001",
+        "representation": "link_only",
+        "suppliedByProvider": true
+      }
+    ],
+    "receipt": {
+      "receiptId": "example-receipt-library-001",
+      "issuedAt": "2029-04-02T10:02:00Z",
+      "providerId": "example-research-library",
+      "toolName": "knowledge_resolve",
+      "resourceIds": ["example-article-001"],
+      "accessState": "entitled",
+      "accessBasis": "library_resolution",
+      "policyId": "example-library-route-v1",
+      "decision": "metadata_only",
+      "retention": "session"
+    },
+    "actions": [
+      {
+        "type": "deep_link",
+        "label": "Continue to the rights holder",
+        "url": "https://publisher.example.test/article/example-article-001",
+        "providerId": "example-research-library"
+      }
+    ]
+  },
+  "boundaryError": {
+    "profile": {
+      "name": "openinquiry.publisher-knowledge-access",
+      "version": "0.1"
+    },
+    "status": "error",
+    "provider": {
+      "id": "example-repository",
+      "name": "Example Knowledge Repository",
+      "role": "repository",
+      "canonicalUrl": "https://repository.example.test"
+    },
+    "receipt": {
+      "receiptId": "example-receipt-error-001",
+      "issuedAt": "2029-04-02T10:03:00Z",
+      "providerId": "example-repository",
+      "toolName": "knowledge_search",
+      "resourceIds": [],
+      "decision": "denied",
+      "retention": "session"
+    },
+    "error": {
+      "code": "PROVIDER_UNAVAILABLE",
+      "message": "The example provider is temporarily unavailable.",
+      "retryable": true,
+      "retryAfterSeconds": 30
+    }
+  }
+}
